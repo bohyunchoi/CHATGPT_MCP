@@ -1,9 +1,6 @@
 @echo off
 cd /d %~dp0
 
-REM GitHub 자격 증명 삭제
-git credential-manager erase https://github.com
-
 REM 원격 주소를 HTTPS로 재설정
 git remote set-url origin https://github.com/bohyunchoi/CHATGPT_MCP.git
 
