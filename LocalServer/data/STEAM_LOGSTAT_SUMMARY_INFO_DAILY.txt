@@ -1,0 +1,84 @@
+# 테이블 가이드라인 정보 저장소
+TABLE_GUIDELINES = {
+    "[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_DAILY]": {
+        "description": "Daily user statistics data for Steam games aggregated by country from log data",
+        "columns": {
+            "REG_DATE": {
+                "type": "DATETIME",
+                "description": "Statistics aggregation date",
+                "nullable": False
+            },
+            "COUNTRY": {
+                "type": "VARCHAR",
+                "description": "Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents overall total)",
+                "nullable": False
+            },
+            "ACTIVE_USER": {
+                "type": "INT",
+                "description": "Active user count - users who were active on the given date",
+                "nullable": True
+            },
+            "NEW_USER": {
+                "type": "INT", 
+                "description": "New user count - newly registered users",
+                "nullable": True
+            },
+            "RETURN_USER": {
+                "type": "INT",
+                "description": "Returning user count - existing users who reconnected",
+                "nullable": True
+            },
+            "PLAY_USER": {
+                "type": "INT",
+                "description": "Playing user count - users who actually played games",
+                "nullable": True
+            },
+            "NEW_PLAY_USER": {
+                "type": "INT",
+                "description": "New playing user count - new users who played games",
+                "nullable": True
+            },
+            "RETURN_PLAY_USER": {
+                "type": "INT",
+                "description": "Returning playing user count - returning users who played games",
+                "nullable": True
+            },
+            "PCCU": {
+                "type": "INT",
+                "description": "Peak Concurrent Connected Users - maximum simultaneous users",
+                "nullable": True
+            },
+            "ACCU": {
+                "type": "INT",
+                "description": "Average Concurrent Connected Users - average simultaneous users",
+                "nullable": True
+            },
+            "TOTAL_CONNECT_TIME": {
+                "type": "INT",
+                "description": "Total connection time in minutes",
+                "nullable": True
+            },
+            "AVG_CONNECT_TIME": {
+                "type": "INT",
+                "description": "Average connection time per user in minutes",
+                "nullable": True
+            },
+            "AVG_PLAY_TIME": {
+                "type": "INT",
+                "description": "Average play time per user in minutes",
+                "nullable": True
+            }
+        },
+        "usage_notes": [
+            "Rows with COUNTRY = '_TOTAL' represent aggregate statistics for the entire date",
+            "Time-related columns are stored in minutes",
+            "Daily statistics allow period-based queries using REG_DATE",
+            "Use COUNTRY column for country-wise comparative analysis"
+        ],
+        "sample_queries": [
+            "-- Overall statistics for a specific date\nSELECT * FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_DAILY] WHERE REG_DATE = '2020-07-14' AND COUNTRY = '_TOTAL'",
+            "-- Korean user statistics query\nSELECT * FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_DAILY] WHERE COUNTRY = 'KR' ORDER BY REG_DATE DESC",
+            "-- Monthly aggregate statistics\nSELECT YEAR(REG_DATE) as Year, MONTH(REG_DATE) as Month, SUM(ACTIVE_USER) as Total_Active\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_DAILY] \nWHERE COUNTRY = '_TOTAL' \nGROUP BY YEAR(REG_DATE), MONTH(REG_DATE) \nORDER BY Year, Month"
+        ]
+    }
+}

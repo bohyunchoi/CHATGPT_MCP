@@ -1,0 +1,44 @@
+{
+    "[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_NEW_USER]": {
+        "description": "신규 가입 유저의 등록 기록 및 속성을 저장하는 테이블 (STEAM 플랫폼용)",
+        "columns": {
+            "REG_DATE": {
+                "type": "DATETIME",
+                "description": "유저 등록(가입) 일시. 시스템 등록 시간 기준 (UTC/KST 여부는 환경에 따라 상이할 수 있음).",
+                "nullable": false
+            },
+            "USER_SN": {
+                "type": "BIGINT",
+                "description": "유저 고유 식별자(시리얼 넘버, PK)",
+                "nullable": false
+            },
+            "COUNTRY": {
+                "type": "VARCHAR",
+                "description": "유저가 가입한 국가의 ISO2 코드 (예: KR, US, JP)",
+                "nullable": false
+            }
+            // 추가 컬럼이 있다면 아래에 계속 작성
+        },
+        "usage_notes": [
+            "REG_DATE를 통해 일별, 주별, 월별 신규 가입 트렌드 분석이 가능함.",
+            "COUNTRY 컬럼을 활용해 국가별 신규 유저 집계, 국가별 마케팅 효과 분석 등에 사용.",
+            "USER_SN은 중복되지 않는 유니크 식별자이며, 다른 로그 테이블과 조인 시 PK로 사용.",
+            "데이터 적재 시 타임존 일치 여부를 반드시 확인(UTC/KST 불일치로 인한 분석 오류 방지)."
+        ],
+        "sample_queries": [
+            "-- 최근 7일간 국가별 신규 가입 유저 수 집계\nSELECT REG_DATE, COUNTRY, COUNT(*) AS NEW_USER_COUNT\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_NEW_USER]\nWHERE REG_DATE >= DATEADD(DAY, -7, GETDATE())\nGROUP BY REG_DATE, COUNTRY\nORDER BY REG_DATE DESC, NEW_USER_COUNT DESC;",
+            
+            "-- 일별 신규 가입자 트렌드\nSELECT REG_DATE, COUNT(*) AS NEW_USERS\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_NEW_USER]\nGROUP BY REG_DATE\nORDER BY REG_DATE DESC;"
+        ],
+        "quality_checks": [
+            "REG_DATE 컬럼에 NULL, 미래 시점 등 이상치 존재 여부 점검",
+            "USER_SN 중복 여부 및 NULL 값 점검",
+            "COUNTRY 값이 ISO2 표준과 불일치 또는 누락된 값 점검",
+            "필요시 타임존 변환 또는 표준화(특히 여러 소스와 집계 시)"
+        ],
+        "common_joins": [
+            "USER_SN으로 게임 플레이 로그 등 타 유저 관련 로그 테이블과 조인하여, 신규 유저의 초반 행동 분석",
+            "COUNTRY별 집계 시 국가 코드 참조 테이블(국가명/지역명 매핑)과 조인"
+        ]
+    }
+}

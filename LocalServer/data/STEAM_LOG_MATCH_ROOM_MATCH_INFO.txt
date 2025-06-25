@@ -1,0 +1,72 @@
+{
+    "[STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_ROOM_MATCH_INFO]": {
+        "description": "매치메이킹 방(ROOM) 단위의 확장 매치 정보 및 홈/어웨이 매치 결과를 저장하는 통계 테이블 (STEAM 플랫폼용)",
+        "columns": {
+            "REG_DATE": {
+                "type": "DATETIME",
+                "description": "해당 로그가 기록된 일시(집계 기준 시각)",
+                "nullable": false
+            },
+            "SERVER_SN": {
+                "type": "INT",
+                "description": "매치가 이루어진 서버의 고유 식별자",
+                "nullable": false
+            },
+            "GAME_MODE": {
+                "type": "VARCHAR",
+                "description": "게임 모드 코드/이름 (예: NORMAL, RANKED 등)",
+                "nullable": false
+            },
+            "ROOM_SN": {
+                "type": "BIGINT",
+                "description": "매치 방 고유 식별자",
+                "nullable": false
+            },
+            "MATCH_EXTEND_VALUE_BASE": {
+                "type": "INT",
+                "description": "방 전체의 매치 확장 기준 값 (매치 리밸런스 또는 추가 시간 등 특수 룰 적용 값)",
+                "nullable": true
+            },
+            "HOME_MATCH_VALUE": {
+                "type": "INT",
+                "description": "HOME 진영의 기본 매치 값 (예: 점수, 달성치 등)",
+                "nullable": true
+            },
+            "HOME_MATCH_EXTEND_COUNT": {
+                "type": "INT",
+                "description": "HOME 진영이 추가로 획득한 확장 매치 횟수 (ex. 연장전 등)",
+                "nullable": true
+            },
+            "AWAY_MATCH_VALUE": {
+                "type": "INT",
+                "description": "AWAY 진영의 기본 매치 값 (예: 점수, 달성치 등)",
+                "nullable": true
+            },
+            "AWAY_MATCH_EXTEND_COUNT": {
+                "type": "INT",
+                "description": "AWAY 진영이 추가로 획득한 확장 매치 횟수",
+                "nullable": true
+            }
+        },
+        "usage_notes": [
+            "REG_DATE, SERVER_SN, GAME_MODE, ROOM_SN 단위로 매치 결과 및 확장 매치(연장전 등) 발생 여부, 승패 요인 분석 등에 활용.",
+            "HOME_MATCH_VALUE, AWAY_MATCH_VALUE로 각 진영의 결과 비교 가능.",
+            "확장 매치 횟수(HOME/AWAY_MATCH_EXTEND_COUNT)와 기준값(MATCH_EXTEND_VALUE_BASE)를 활용하여 연장전 빈도, 밸런스 조정 효과 등 파악.",
+            "ROOM_SN을 활용해 상세 플레이 로그와 조인 가능."
+        ],
+        "sample_queries": [
+            "-- 최근 30일간 게임모드별 평균 확장 매치 횟수 집계\nSELECT GAME_MODE, AVG(HOME_MATCH_EXTEND_COUNT) AS AVG_HOME_EXTEND, AVG(AWAY_MATCH_EXTEND_COUNT) AS AVG_AWAY_EXTEND\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_ROOM_MATCH_INFO]\nWHERE REG_DATE >= DATEADD(DAY, -30, GETDATE())\nGROUP BY GAME_MODE;",
+            
+            "-- 서버별/모드별 방 단위 매치 결과(홈/어웨이 점수 평균)\nSELECT SERVER_SN, GAME_MODE, AVG(HOME_MATCH_VALUE) AS AVG_HOME_SCORE, AVG(AWAY_MATCH_VALUE) AS AVG_AWAY_SCORE\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_ROOM_MATCH_INFO]\nGROUP BY SERVER_SN, GAME_MODE;"
+        ],
+        "quality_checks": [
+            "ROOM_SN, SERVER_SN, GAME_MODE, REG_DATE 등 주요 식별자에 NULL/중복 등 비정상값 존재 여부 점검",
+            "HOME/AWAY_MATCH_VALUE, *_EXTEND_COUNT 등 음수/이상치 점검",
+            "MATCH_EXTEND_VALUE_BASE의 적용 조건과 값 해석 가이드 공유 필요"
+        ],
+        "common_joins": [
+            "ROOM_SN을 세부 플레이/유저 로그와 조인해 방 내 상세 이벤트 추적",
+            "SERVER_SN, GAME_MODE 등 운영 메타 테이블과 조인해 서버/모드 정보 매핑"
+        ]
+    }
+}

@@ -1,0 +1,86 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_MONTHLY]": {
+    "description": "Monthly user statistics data for Steam games aggregated by country from log data",
+    "columns": {
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date (typically first or last day of month)",
+            "nullable": False
+        },
+        "COUNTRY": {
+            "type": "VARCHAR",
+            "description": "Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents overall total)",
+            "nullable": False
+        },
+        "ACTIVE_USER": {
+            "type": "INT",
+            "description": "Monthly Active Users (MAU) - users who were active during the month",
+            "nullable": True
+        },
+        "NEW_USER": {
+            "type": "INT", 
+            "description": "Monthly new user count - newly registered users during the month",
+            "nullable": True
+        },
+        "RETURN_USER": {
+            "type": "INT",
+            "description": "Monthly returning user count - existing users who reconnected during the month",
+            "nullable": True
+        },
+        "PLAY_USER": {
+            "type": "INT",
+            "description": "Monthly playing user count - users who actually played games during the month",
+            "nullable": True
+        },
+        "NEW_PLAY_USER": {
+            "type": "INT",
+            "description": "Monthly new playing user count - new users who played games during the month",
+            "nullable": True
+        },
+        "RETURN_PLAY_USER": {
+            "type": "INT",
+            "description": "Monthly returning playing user count - returning users who played games during the month",
+            "nullable": True
+        },
+        "PCCU": {
+            "type": "INT",
+            "description": "Peak Concurrent Connected Users - maximum simultaneous users in the month",
+            "nullable": True
+        },
+        "ACCU": {
+            "type": "INT",
+            "description": "Average Concurrent Connected Users - monthly average of simultaneous users",
+            "nullable": True
+        },
+        "TOTAL_CONNECT_TIME": {
+            "type": "INT",
+            "description": "Total connection time for the month in minutes",
+            "nullable": True
+        },
+        "AVG_CONNECT_TIME": {
+            "type": "INT",
+            "description": "Average connection time per user for the month in minutes",
+            "nullable": True
+        },
+        "AVG_PLAY_TIME": {
+            "type": "INT",
+            "description": "Average play time per user for the month in minutes",
+            "nullable": True
+        }
+    },
+    "usage_notes": [
+        "Rows with COUNTRY = '_TOTAL' represent aggregate statistics for the entire month",
+        "Time-related columns are stored in minutes",
+        "Monthly statistics are useful for long-term trend analysis",
+        "REG_DATE typically contains the first or last day of each month",
+        "Use COUNTRY column for country-wise comparative analysis"
+    ],
+    "sample_queries": [
+        "-- Overall statistics for a specific month\nSELECT * FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_MONTHLY] \nWHERE YEAR(REG_DATE) = 2025 AND MONTH(REG_DATE) = 5 AND COUNTRY = '_TOTAL'",
+        
+        "-- Korean user statistics trend\nSELECT REG_DATE, ACTIVE_USER, NEW_USER, PLAY_USER, PCCU \nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_MONTHLY] \nWHERE COUNTRY = 'KR' \nORDER BY REG_DATE DESC",
+        
+        "-- Year-over-year comparison\nSELECT \n    YEAR(REG_DATE) as Year,\n    MONTH(REG_DATE) as Month,\n    ACTIVE_USER,\n    NEW_USER,\n    PCCU\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_MONTHLY] \nWHERE COUNTRY = '_TOTAL' \n    AND MONTH(REG_DATE) = 6 \n    AND YEAR(REG_DATE) IN (2024, 2025)\nORDER BY Year, Month",
+        
+        "-- Country comparison for specific month\nSELECT \n    COUNTRY,\n    ACTIVE_USER,\n    PLAY_USER,\n    ROUND(CAST(PLAY_USER AS FLOAT) / ACTIVE_USER * 100, 2) as Play_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_MONTHLY] \nWHERE REG_DATE = '2025-05-01' \n    AND COUNTRY != '_TOTAL'\nORDER BY ACTIVE_USER DESC"
+    ]
+}

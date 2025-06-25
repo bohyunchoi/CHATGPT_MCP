@@ -1,0 +1,71 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_WEEKLY]": {
+    "description": "Weekly user distribution by connection time ranges (global aggregate only)",
+    "columns": {
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date (typically Sunday or Monday of each week)",
+            "nullable": False
+        },
+        "ACTIVE_USER_COUNT": {
+            "type": "INT",
+            "description": "Total active user count for the week (WAU)",
+            "nullable": True
+        },
+        "COUNT_5": {
+            "type": "INT",
+            "description": "Users with average daily connection time less than 5 minutes during the week",
+            "nullable": True
+        },
+        "COUNT_5_10": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 5-10 minutes during the week",
+            "nullable": True
+        },
+        "COUNT_10_30": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 10-30 minutes during the week",
+            "nullable": True
+        },
+        "COUNT_30_60": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 30-60 minutes during the week",
+            "nullable": True
+        },
+        "COUNT_60_120": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 60-120 minutes (1-2 hours) during the week",
+            "nullable": True
+        },
+        "COUNT_120_240": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 120-240 minutes (2-4 hours) during the week",
+            "nullable": True
+        },
+        "COUNT_240": {
+            "type": "INT",
+            "description": "Users with average daily connection time over 240 minutes (4+ hours) during the week",
+            "nullable": True
+        }
+    },
+    "key_differences": [
+        "No COUNTRY column - only global totals are stored",
+        "Represents weekly aggregation of user engagement patterns",
+        "Bridges daily volatility and monthly trends"
+    ],
+    "usage_notes": [
+        "All data represents global aggregate statistics (no country breakdown)",
+        "Each user is counted once per week in their primary time range",
+        "Time ranges based on average daily play time during the week",
+        "Useful for week-over-week engagement tracking",
+        "Can detect short-term changes in player behavior"
+    ],
+    "sample_queries": [
+        "-- Recent 8 weeks engagement trend\nSELECT \n    REG_DATE,\n    ACTIVE_USER_COUNT as WAU,\n    ROUND(CAST(COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Hardcore_Pct,\n    ROUND(CAST(COUNT_120_240 + COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Heavy_User_Pct,\n    ROUND(CAST(COUNT_5 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Risk_User_Pct\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_WEEKLY]\nORDER BY REG_DATE DESC\nOFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY",
+        
+        "-- Week-over-week engagement changes\nWITH WeeklyChanges AS (\n    SELECT \n        REG_DATE,\n        ACTIVE_USER_COUNT,\n        (COUNT_120_240 + COUNT_240) as Heavy_Users,\n        LAG((COUNT_120_240 + COUNT_240), 1) OVER (ORDER BY REG_DATE) as Prev_Heavy_Users\n    FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_WEEKLY]\n)\nSELECT \n    REG_DATE,\n    ACTIVE_USER_COUNT as WAU,\n    Heavy_Users,\n    Heavy_Users - Prev_Heavy_Users as Heavy_User_Change,\n    ROUND((CAST(Heavy_Users - Prev_Heavy_Users AS FLOAT) / NULLIF(Prev_Heavy_Users, 0)) * 100, 2) as Heavy_User_Growth_Pct\nFROM WeeklyChanges\nWHERE Prev_Heavy_Users IS NOT NULL\nORDER BY REG_DATE DESC",
+        
+        "-- 4-week moving average\nSELECT \n    REG_DATE,\n    ACTIVE_USER_COUNT,\n    AVG(ACTIVE_USER_COUNT) OVER (ORDER BY REG_DATE ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) as MA4_WAU,\n    AVG(CAST(COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100) OVER (ORDER BY REG_DATE ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) as MA4_Hardcore_Pct\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_WEEKLY]\nWHERE REG_DATE >= DATEADD(WEEK, -12, GETDATE())\nORDER BY REG_DATE DESC",
+        
+        "-- Engagement health score trend\nSELECT \n    REG_DATE,\n    ACTIVE_USER_COUNT as WAU,\n    -- Calculate weighted engagement score\n    ROUND(\n        (COUNT_5 * 0.1 + COUNT_5_10 * 0.2 + COUNT_10_30 * 0.5 + \n         COUNT_30_60 * 1.0 + COUNT_60_120 * 2.0 + \n         COUNT_120_240 * 3.0 + COUNT_240 * 4.0) / ACTIVE_USER_COUNT, \n    2) as Engagement_Score,\n    -- Risk indicator\n    CASE \n        WHEN CAST(COUNT_5 AS FLOAT) / ACTIVE_USER_COUNT > 0.4 THEN 'High Risk'\n        WHEN CAST(COUNT_5 AS FLOAT) / ACTIVE_USER_COUNT > 0.3 THEN 'Medium Risk'\n        ELSE 'Low Risk'\n    END as Churn_Risk_Level\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_WEEKLY]\nWHERE REG_DATE >= DATEADD(WEEK, -8, GETDATE())\nORDER BY REG_DATE DESC"
+    ]
+}

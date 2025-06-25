@@ -1,0 +1,13 @@
+project-root/
+├── app/
+│   ├── main.py
+│   ├── utils.py
+│   └── routers/
+│       ├── file_ops.py
+│       ├── bat_ops.py
+│       ├── listing.py
+│       ├── github.py
+│       └── db.py
+├── File/
+│   └── VibeCodeing/
+└── requirements.txt

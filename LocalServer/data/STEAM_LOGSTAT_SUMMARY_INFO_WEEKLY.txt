@@ -1,0 +1,76 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_WEEKLY]": {
+    "description": "Weekly user statistics data for Steam games (global aggregate only)",
+    "columns": {
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date (typically Sunday or Monday of each week)",
+            "nullable": False
+        },
+        "ACTIVE_USER": {
+            "type": "INT",
+            "description": "Weekly Active Users (WAU) - users who were active during the week",
+            "nullable": True
+        },
+        "NEW_USER": {
+            "type": "INT", 
+            "description": "Weekly new user count - newly registered users during the week",
+            "nullable": True
+        },
+        "RETURN_USER": {
+            "type": "INT",
+            "description": "Weekly returning user count - existing users who reconnected during the week",
+            "nullable": True
+        },
+        "PLAY_USER": {
+            "type": "INT",
+            "description": "Weekly playing user count - users who actually played games during the week",
+            "nullable": True
+        },
+        "NEW_PLAY_USER": {
+            "type": "INT",
+            "description": "Weekly new playing user count - new users who played games during the week",
+            "nullable": True
+        },
+        "RETURN_PLAY_USER": {
+            "type": "INT",
+            "description": "Weekly returning playing user count - returning users who played games during the week",
+            "nullable": True
+        },
+        "TOTAL_CONNECT_TIME": {
+            "type": "INT",
+            "description": "Total connection time for the week in minutes",
+            "nullable": True
+        },
+        "AVG_CONNECT_TIME": {
+            "type": "INT",
+            "description": "Average connection time per user for the week in minutes",
+            "nullable": True
+        },
+        "AVG_PLAY_TIME": {
+            "type": "INT",
+            "description": "Average play time per user for the week in minutes",
+            "nullable": True
+        }
+    },
+    "key_differences": [
+        "No COUNTRY column - only global totals are stored",
+        "No PCCU/ACCU columns - concurrent user metrics not included",
+        "Simplified structure focusing on core user metrics"
+    ],
+    "usage_notes": [
+        "All data represents global aggregate statistics (no country breakdown)",
+        "Time-related columns are stored in minutes",
+        "Weekly statistics bridge the gap between daily volatility and monthly trends",
+        "REG_DATE typically contains the start or end date of each week",
+        "Useful for week-over-week (WoW) comparisons"
+    ],
+    "sample_queries": [
+        "-- Recent 8 weeks trend\nSELECT \n    REG_DATE,\n    ACTIVE_USER,\n    NEW_USER,\n    PLAY_USER,\n    ROUND(CAST(PLAY_USER AS FLOAT) / ACTIVE_USER * 100, 2) as Play_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_WEEKLY] \nORDER BY REG_DATE DESC\nOFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY",
+        
+        "-- Week-over-Week growth rate\nWITH WeeklyData AS (\n    SELECT \n        REG_DATE,\n        ACTIVE_USER,\n        LAG(ACTIVE_USER, 1) OVER (ORDER BY REG_DATE) as Prev_Week_AU\n    FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_WEEKLY]\n)\nSELECT \n    REG_DATE,\n    ACTIVE_USER,\n    Prev_Week_AU,\n    ROUND((CAST(ACTIVE_USER - Prev_Week_AU AS FLOAT) / Prev_Week_AU) * 100, 2) as WoW_Growth_Rate\nFROM WeeklyData\nWHERE Prev_Week_AU IS NOT NULL\nORDER BY REG_DATE DESC",
+        
+        "-- Monthly average from weekly data\nSELECT \n    YEAR(REG_DATE) as Year,\n    MONTH(REG_DATE) as Month,\n    COUNT(*) as Week_Count,\n    AVG(ACTIVE_USER) as Avg_WAU,\n    AVG(NEW_USER) as Avg_Weekly_New,\n    AVG(AVG_PLAY_TIME) as Avg_Play_Time\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_WEEKLY] \nGROUP BY YEAR(REG_DATE), MONTH(REG_DATE)\nORDER BY Year DESC, Month DESC",
+        
+        "-- User retention analysis\nSELECT \n    REG_DATE,\n    ACTIVE_USER,\n    NEW_USER,\n    RETURN_USER,\n    ROUND(CAST(RETURN_USER AS FLOAT) / (ACTIVE_USER - NEW_USER) * 100, 2) as Return_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_SUMMARY_INFO_WEEKLY] \nWHERE ACTIVE_USER > NEW_USER  -- Avoid division by zero\nORDER BY REG_DATE DESC"
+    ]
+}

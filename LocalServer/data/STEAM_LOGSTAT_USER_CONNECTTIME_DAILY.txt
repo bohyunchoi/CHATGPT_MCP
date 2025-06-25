@@ -1,0 +1,71 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_DAILY]": {
+    "description": "Daily user distribution by connection time ranges for Steam games",
+    "columns": {
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date",
+            "nullable": False
+        },
+        "COUNTRY": {
+            "type": "VARCHAR",
+            "description": "Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents overall total)",
+            "nullable": False
+        },
+        "ACTIVE_USER_COUNT": {
+            "type": "INT",
+            "description": "Total active user count for the day",
+            "nullable": True
+        },
+        "COUNT_5": {
+            "type": "INT",
+            "description": "Users with connection time less than 5 minutes",
+            "nullable": True
+        },
+        "COUNT_5_10": {
+            "type": "INT",
+            "description": "Users with connection time between 5-10 minutes",
+            "nullable": True
+        },
+        "COUNT_10_30": {
+            "type": "INT",
+            "description": "Users with connection time between 10-30 minutes",
+            "nullable": True
+        },
+        "COUNT_30_60": {
+            "type": "INT",
+            "description": "Users with connection time between 30-60 minutes",
+            "nullable": True
+        },
+        "COUNT_60_120": {
+            "type": "INT",
+            "description": "Users with connection time between 60-120 minutes (1-2 hours)",
+            "nullable": True
+        },
+        "COUNT_120_240": {
+            "type": "INT",
+            "description": "Users with connection time between 120-240 minutes (2-4 hours)",
+            "nullable": True
+        },
+        "COUNT_240": {
+            "type": "INT",
+            "description": "Users with connection time over 240 minutes (4+ hours)",
+            "nullable": True
+        }
+    },
+    "usage_notes": [
+        "All COUNT columns represent unique user counts in each time range",
+        "Sum of all COUNT_* columns should equal ACTIVE_USER_COUNT",
+        "Time ranges are mutually exclusive (each user appears in only one range)",
+        "Useful for understanding user engagement patterns",
+        "Can identify casual vs hardcore player segments"
+    ],
+    "sample_queries": [
+        "-- Connection time distribution for specific date\nSELECT \n    COUNTRY,\n    ACTIVE_USER_COUNT,\n    COUNT_5,\n    COUNT_5_10,\n    COUNT_10_30,\n    COUNT_30_60,\n    COUNT_60_120,\n    COUNT_120_240,\n    COUNT_240\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_DAILY]\nWHERE REG_DATE = '2025-06-01' AND COUNTRY = '_TOTAL'",
+        
+        "-- Calculate percentage distribution\nSELECT \n    REG_DATE,\n    COUNTRY,\n    ROUND(CAST(COUNT_5 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_UNDER_5MIN,\n    ROUND(CAST(COUNT_5_10 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_5_10MIN,\n    ROUND(CAST(COUNT_10_30 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_10_30MIN,\n    ROUND(CAST(COUNT_30_60 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_30_60MIN,\n    ROUND(CAST(COUNT_60_120 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_1_2HOUR,\n    ROUND(CAST(COUNT_120_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_2_4HOUR,\n    ROUND(CAST(COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as PCT_OVER_4HOUR\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_DAILY]\nWHERE REG_DATE = '2025-06-01' AND ACTIVE_USER_COUNT > 0\nORDER BY ACTIVE_USER_COUNT DESC",
+        
+        "-- Weekly trend of hardcore players (4+ hours)\nSELECT \n    REG_DATE,\n    COUNT_240 as Hardcore_Users,\n    ACTIVE_USER_COUNT as Total_Users,\n    ROUND(CAST(COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Hardcore_Percentage\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_DAILY]\nWHERE COUNTRY = '_TOTAL' \n    AND REG_DATE >= DATEADD(DAY, -7, GETDATE())\nORDER BY REG_DATE DESC",
+        
+        "-- Country comparison of engagement levels\nSELECT \n    COUNTRY,\n    SUM(COUNT_5 + COUNT_5_10 + COUNT_10_30) as Light_Users,\n    SUM(COUNT_30_60 + COUNT_60_120) as Medium_Users,\n    SUM(COUNT_120_240 + COUNT_240) as Heavy_Users,\n    SUM(ACTIVE_USER_COUNT) as Total_Users\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_DAILY]\nWHERE REG_DATE >= '2025-06-01' AND REG_DATE < '2025-06-02'\n    AND COUNTRY != '_TOTAL'\nGROUP BY COUNTRY\nORDER BY Total_Users DESC"
+    ]
+}

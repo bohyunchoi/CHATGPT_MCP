@@ -1,0 +1,150 @@
+{
+  "[CROSS_LOG_REPL].[SC_FS2].[LOG_CROSS_MATCH_USER_INFO]": {
+    "description": "크로스매치(플랫폼 간 매칭) 사용자 상세 로그 기록 테이블. 각 게임 세션 내 유저별 매칭 결과, 스쿼드/팀/방 정보 및 매칭 점수, 행동 기록 등을 저장.",
+    "columns": {
+      "IDX": {
+        "type": "BIGINT",
+        "description": "로그 고유 식별자(Primary Key, Auto Increment)",
+        "nullable": false
+      },
+      "PLATFORM_CODE": {
+        "type": "SMALLINT",
+        "description": "유저 접속 플랫폼 코드 (예: 1=PS, 2=XBOX, 3=STEAM, 4=CROSS 등)",
+        "nullable": false
+      },
+      "USER_SN": {
+        "type": "BIGINT",
+        "description": "유저 고유 식별자(Serial Number, PK/참조키)",
+        "nullable": false
+      },
+      "SLOT": {
+        "type": "TINYINT",
+        "description": "유저 슬롯/포지션 번호(방 내 위치)",
+        "nullable": false
+      },
+      "LV": {
+        "type": "SMALLINT",
+        "description": "유저 레벨(당시 매치 기준)",
+        "nullable": false
+      },
+      "MATCH_VALUE": {
+        "type": "INT",
+        "description": "유저 단독 매칭 점수/가중치(매치메이킹 관련)",
+        "nullable": false
+      },
+      "SQUAD_SN": {
+        "type": "BIGINT",
+        "description": "스쿼드(소규모 파티) 식별자(참여 시)",
+        "nullable": true
+      },
+      "SQUAD_MATCH_VALUE": {
+        "type": "INT",
+        "description": "스쿼드 매치 점수(해당 스쿼드 전체 기준, 미참여 시 NULL)",
+        "nullable": true
+      },
+      "SQUAD_EXTEND_VALUE": {
+        "type": "INT",
+        "description": "스쿼드 확장 점수/가중치 (추가 매치 결과 등)",
+        "nullable": true
+      },
+      "SQUAD_EXTEND_COUNT": {
+        "type": "INT",
+        "description": "스쿼드 확장 횟수(특정 조건 하에 누적된 수치, 미참여 시 NULL)",
+        "nullable": true
+      },
+      "TEAM_SN": {
+        "type": "BIGINT",
+        "description": "팀 식별자(일반적으로 2개 팀 중 어느 쪽에 소속되었는지)",
+        "nullable": true
+      },
+      "TEAM_MATCH_VALUE": {
+        "type": "INT",
+        "description": "팀 전체 매치 점수(팀 단위 매칭 결과, 미참여 시 NULL)",
+        "nullable": true
+      },
+      "TEAM_EXTEND_VALUE": {
+        "type": "INT",
+        "description": "팀 확장 점수/가중치 (팀 단위 추가 결과 등)",
+        "nullable": true
+      },
+      "TEAM_EXTEND_COUNT": {
+        "type": "INT",
+        "description": "팀 확장 횟수(누적 수치, 미참여 시 NULL)",
+        "nullable": true
+      },
+      "SERVER_SN": {
+        "type": "BIGINT",
+        "description": "서버 식별자(매치가 실행된 서버 고유 번호)",
+        "nullable": false
+      },
+      "GAME_MODE": {
+        "type": "SMALLINT",
+        "description": "게임 모드 코드. 아래 enum 참고.",
+        "nullable": false,
+        "enum_values": {
+          "0":  "GAME_MODE_NONE - 없음(미설정, Not Assigned)",
+          "1":  "GAME_MODE_1VS1_DEBUG - 1:1 디버그(테스트/디버깅 전용)",
+          "2":  "GAME_MODE_3VS3 - 3:3 공식전, 크루 협동전/크루전(개편 전, 미사용)",
+          "3":  "GAME_MODE_1VS1 - 1:1 유저+AI(Player with AI)",
+          "4":  "GAME_MODE_FREE - 자유 모드(Custom Free Play)",
+          "5":  "GAME_MODE_ARCADE - 아케이드/도전 모드(Arcade Mode, Challenge)",
+          "6":  "GAME_MODE_RIN - 린 모드(특정 테마 모드)",
+          "7":  "GAME_MODE_ZOMBIE - 좀비 모드",
+          "8":  "GAME_MODE_CREW - 크루 대항전(개편 전, 미사용)",
+          "9":  "GAME_MODE_RANK - 랭크전(Ranked Match)",
+          "10": "GAME_MODE_CREW_TOURNAMENT - 크루 토너먼트(Crew Tournament)",
+          "11": "GAME_MODE_OLYMPIC - 올림픽 모드(Olympic Mode, eGameMode)",
+          "12": "GAME_MODE_3VS3_LOW_LEVEL - 3:3 저레벨 매치(입문자, IF문 조건처리용)",
+          "13": "GAME_MODE_BALANCE_RANK - 밸런스 랭크 매치(Balance Rank Mode)",
+          "14": "GAME_MODE_MAJOR_TOURNAMENT - 공식 토너먼트(Major Tournament)",
+          "15": "GAME_MODE_USER_TOURNAMENT - 유저 토너먼트(User Tournament)",
+          "16": "GAME_MODE_3VS3_BOTH - 3:3 및 3:3_LOW_LEVEL 통합(리그 관련)",
+          "17": "GAME_MODE_FREE_RANK - 커스텀 자유 랭크(Custom Free Rank)",
+          "18": "GAME_MODE_FREE_OLYMPIC - 커스텀 자유 3:3(Custom Free 3x3/Olympic)",
+          "19": "GAME_MODE_FREE_BALANCE_RANK - 커스텀 자유 밸런스 버프(FREE Balance Buff Mode)",
+          "100": "GAME_MODE_ALL - 전체(조건체크용, For filter only)",
+          "101": "- 랭크→아케이드 임시전용(중복사용 금지)"
+        },
+      "ROOM_SN": {
+        "type": "BIGINT",
+        "description": "매치가 이루어진 방(룸) 고유 번호",
+        "nullable": false
+      },
+      "TRANSACTION_CODE": {
+        "type": "SMALLINT",
+        "description": "트랜잭션/이벤트 코드(매치 내 특정 행동, 거래, 이벤트 구분용)",
+        "nullable": true
+      },
+      "AI_MODE": {
+        "type": "TINYINT",
+        "description": "AI/봇 모드 여부(0=실제 유저, 1=AI 매치, 2=혼합 등)",
+        "nullable": false
+      },
+      "REG_DATE": {
+        "type": "DATETIME",
+        "description": "로그 생성 일시(매치 종료/저장 시점, KST/UTC 등 환경별 상이)",
+        "nullable": false
+      }
+    },
+    "usage_notes": [
+      "플랫폼 간 크로스매치 유저별 매칭 결과, 스쿼드/팀 참여 기록, 매치 점수 분석에 활용.",
+      "매치 밸런싱/매칭 품질 분석, 유저/스쿼드/팀 단위 통계, AI 매치 비율 모니터링 등 가능.",
+      "USER_SN으로 유저 기본정보, ROOM_SN으로 매치/방 로그와 조인해 세부 분석 가능.",
+      "REG_DATE 기준 일/주/월별 매칭 트렌드, 플랫폼 별 매치 참여 추이 집계 등에 활용."
+    ],
+    "sample_queries": [
+      "-- 일별, 플랫폼별 매치 참여 유저 집계\nSELECT CONVERT(date, REG_DATE) AS DAY, PLATFORM_CODE, COUNT(DISTINCT USER_SN) AS USERS\nFROM [CROSS_LOG_REPL].[SC_FS2].[LOG_CROSS_MATCH_USER_INFO]\nGROUP BY CONVERT(date, REG_DATE), PLATFORM_CODE\nORDER BY DAY DESC;",
+      "-- 최근 7일간 AI 매치 비율\nSELECT CONVERT(date, REG_DATE) AS DAY, SUM(CASE WHEN AI_MODE=1 THEN 1 ELSE 0 END) AS AI_MATCHES, COUNT(*) AS TOTAL_MATCHES\nFROM [CROSS_LOG_REPL].[SC_FS2].[LOG_CROSS_MATCH_USER_INFO]\nWHERE REG_DATE >= DATEADD(DAY, -7, GETDATE())\nGROUP BY CONVERT(date, REG_DATE);"
+    ],
+    "quality_checks": [
+      "IDX, USER_SN, ROOM_SN, REG_DATE 등 PK/참조키의 중복, NULL, 미래 시점 등 데이터 이상치 점검.",
+      "매치 점수(MATCH_VALUE 등) 음수, 비정상 값 등 검증.",
+      "플랫폼 코드, 게임 모드 코드, AI_MODE 등 사전 정의 값과 불일치 여부 체크."
+    ],
+    "common_joins": [
+      "USER_SN으로 유저 기본 테이블과 JOIN(유저 속성/메타 분석)",
+      "ROOM_SN, SERVER_SN으로 매치/방 로그와 JOIN",
+      "SQUAD_SN, TEAM_SN으로 파티/팀별 집계 시 활용"
+    ]
+  }
+}

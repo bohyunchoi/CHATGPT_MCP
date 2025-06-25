@@ -1,0 +1,75 @@
+{
+    "[STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_WAIT_TIME_FOR_ROOM]": {
+        "description": "매치메이킹 대기 시간, 성공/실패 현황을 서버/게임모드/스쿼드 단위로 기록하는 통계 테이블 (STEAM 플랫폼용)",
+        "columns": {
+            "IDX": {
+                "type": "INT",
+                "description": "내부 식별자(PK), 자동 증가값",
+                "nullable": false
+            },
+            "REG_DATE": {
+                "type": "DATETIME",
+                "description": "로그가 집계된 기준 일시",
+                "nullable": false
+            },
+            "SERVER_SN": {
+                "type": "INT",
+                "description": "서버 고유 식별자(번호)",
+                "nullable": false
+            },
+            "GAME_MODE": {
+                "type": "VARCHAR",
+                "description": "게임 모드 코드/이름 (예: SOLO, DUO, SQUAD 등)",
+                "nullable": false
+            },
+            "SQUAD_COUNT": {
+                "type": "INT",
+                "description": "해당 서버/모드에서 매칭 시도된 전체 스쿼드 수",
+                "nullable": false
+            },
+            "SUCC_COUNT": {
+                "type": "INT",
+                "description": "매칭에 성공한 스쿼드 수",
+                "nullable": false
+            },
+            "SUCC_WAIT_TIME_SEC": {
+                "type": "INT",
+                "description": "매칭 성공 시 평균 대기 시간(초)",
+                "nullable": false
+            },
+            "FAIL_COUNT": {
+                "type": "INT",
+                "description": "매칭에 실패한 스쿼드 수",
+                "nullable": false
+            },
+            "FAIL_WAIT_TIME_SEC": {
+                "type": "INT",
+                "description": "매칭 실패 시 평균 대기 시간(초)",
+                "nullable": false
+            }
+        },
+        "usage_notes": [
+            "REG_DATE, SERVER_SN, GAME_MODE 기준으로 시간/서버/모드별 매칭 현황 및 대기 시간 분석에 사용.",
+            "SQUAD_COUNT 대비 SUCC_COUNT, FAIL_COUNT를 활용해 성공률, 실패율 산출.",
+            "대기 시간(성공/실패)을 비교하여 병목 발생 서버, 모드 탐지 가능.",
+            "통계 집계 주기(일/시간/분 단위)에 따라 REG_DATE 해석 필요."
+        ],
+        "sample_queries": [
+            "-- 최근 7일간 서버/모드별 매칭 성공률 및 평균 대기 시간\nSELECT REG_DATE, SERVER_SN, GAME_MODE, SQUAD_COUNT, SUCC_COUNT, FAIL_COUNT, \nCASE WHEN SQUAD_COUNT > 0 THEN CAST(SUCC_COUNT AS FLOAT) / SQUAD_COUNT ELSE 0 END AS SUCC_RATE, \nSUCC_WAIT_TIME_SEC, FAIL_WAIT_TIME_SEC \nFROM [STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_WAIT_TIME_FOR_ROOM]\nWHERE REG_DATE >= DATEADD(DAY, -7, GETDATE())\nORDER BY REG_DATE DESC, SERVER_SN, GAME_MODE;",
+            
+            "-- 전체 기간, 게임모드별 매칭 성공률 집계\nSELECT GAME_MODE, SUM(SQUAD_COUNT) AS TOTAL_SQUAD, SUM(SUCC_COUNT) AS TOTAL_SUCC, SUM(FAIL_COUNT) AS TOTAL_FAIL, \nCASE WHEN SUM(SQUAD_COUNT) > 0 THEN CAST(SUM(SUCC_COUNT) AS FLOAT) / SUM(SQUAD_COUNT) ELSE 0 END AS SUCC_RATE \nFROM [STEAM_LOG_REPL].[SC_FS2].[LOG_MATCH_WAIT_TIME_FOR_ROOM] \nGROUP BY GAME_MODE;"
+        ],
+        "quality_checks": [
+            "IDX 중복/NULL 여부 점검 (PK, 자동증가값 확인)",
+            "REG_DATE 집계 주기/포맷 일치 여부 점검",
+            "SQUAD_COUNT = SUCC_COUNT + FAIL_COUNT 논리적 불일치 존재 여부 점검",
+            "SUCC_WAIT_TIME_SEC, FAIL_WAIT_TIME_SEC 음수, NULL, 비정상값(0 이하) 체크",
+            "SERVER_SN, GAME_MODE 값이 운영 시스템의 기준 코드/목록과 일치하는지 점검"
+        ],
+        "common_joins": [
+            "SERVER_SN을 서버 메타/운영 테이블과 조인해 지역/스펙별 분석",
+            "GAME_MODE를 게임 모드 코드 테이블과 조인해 상세 모드명/설명 매핑",
+            "REG_DATE를 다른 게임/유저 통계 테이블과 조인하여 시계열 매칭 분석"
+        ]
+    }
+}

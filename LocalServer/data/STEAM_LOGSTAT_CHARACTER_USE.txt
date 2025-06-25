@@ -1,0 +1,125 @@
+{
+    "[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_CHARACTER_USE]": {
+        "description": "국가별/캐릭터별 모드(3vs3, 1vs1)별 플레이 횟수 및 승률을 기록하는 캐릭터 사용 통계 테이블 (STEAM 플랫폼용)",
+        "columns": {
+            "REG_DATE": {
+                "type": "DATETIME",
+                "description": "통계 집계 일시(일별 등 집계 주기 단위)",
+                "nullable": false
+            },
+            "COUNTRY": {
+                "type": "VARCHAR",
+                "description": "플레이어의 국가 코드 (ISO2, 예: KR, US, JP)",
+                "nullable": false
+            },
+            "CHARACTER_CODE": {
+                "type": "VARCHAR or INT",
+                "description": "캐릭터 고유 코드(enum, 아래 코드맵 참고). 실서비스 및 통계 분석 시 enum값과 문자열 이름 모두 사용됨.",
+                "nullable": false,
+                "code_map": {
+                    "0":  "kCHARACTER_CODE_NONE",
+                    "1":  "kCHARACTER_CODE_LUTHER",
+                    "2":  "kCHARACTER_CODE_BIGDOG",
+                    "3":  "kCHARACTER_CODE_LEE",
+                    "4":  "kCHARACTER_CODE_CLARKE",
+                    "5":  "kCHARACTER_CODE_MURDOCK",
+                    "6":  "kCHARACTER_CODE_LULU",
+                    "7":  "kCHARACTER_CODE_AMANDA",
+                    "8":  "kCHARACTER_CODE_JOEY",
+                    "9":  "kCHARACTER_CODE_WILLIAM",
+                    "10": "kCHARACTER_CODE_KIM",
+                    "11": "kCHARACTER_CODE_PEDRO",
+                    "12": "kCHARACTER_CODE_CINDY",
+                    "13": "kCHARACTER_CODE_HELENA",
+                    "14": "kCHARACTER_CODE_CAROLINA",
+                    "15": "kCHARACTER_CODE_FRED",
+                    "16": "kCHARACTER_CODE_CHRISTA",
+                    "17": "kCHARACTER_CODE_PROFESSOR",
+                    "18": "kCHARACTER_CODE_RIN",
+                    "19": "kCHARACTER_CODE_CARTER",
+                    "20": "kCHARACTER_CODE_JASON",
+                    "21": "kCHARACTER_CODE_MAX",
+                    "22": "kCHARACTER_CODE_REBECCA",
+                    "23": "kCHARACTER_CODE_LITTLE_FOX",
+                    "24": "kCHARACTER_CODE_JIMMY",
+                    "25": "kCHARACTER_CODE_FEI",
+                    "26": "kCHARACTER_CODE_WALKER",
+                    "27": "kCHARACTER_CODE_SARU",
+                    "28": "kCHARACTER_CODE_GINGER",
+                    "29": "kCHARACTER_CODE_BIGJOE",
+                    "30": "kCHARACTER_CODE_NADIA",
+                    "31": "kCHARACTER_CODE_DEACON",
+                    "32": "kCHARACTER_CODE_MIKA",
+                    "33": "kCHARACTER_CODE_JACK",
+                    "34": "kCHARACTER_CODE_CAMILA",
+                    "35": "kCHARACTER_CODE_NOAH",
+                    "36": "kCHARACTER_CODE_AYLA",
+                    "37": "kCHARACTER_CODE_FOX",
+                    "38": "kCHARACTER_CODE_LIU",
+                    "39": "kCHARACTER_CODE_HOWL",
+                    "40": "kCHARACTER_CODE_UMA",
+                    "41": "kCHARACTER_CODE_CHLOE",
+                    "42": "kCHARACTER_CODE_DOUBLED",
+                    "43": "kCHARACTER_CODE_MCCC",
+                    "44": "kCHARACTER_CODE_JESSIE",
+                    "45": "kCHARACTER_CODE_LYOID",
+                    "46": "kCHARACTER_CODE_GENESA",
+                    "47": "kCHARACTER_CODE_GIANTG",
+                    "48": "kCHARACTER_CODE_BLAIR",
+                    "49": "kCHARACTER_CODE_DJBAGMAN",
+                    "50": "kCHARACTER_CODE_CLARA",
+                    "51": "kCHARACTER_CODE_YUNA",
+                    "52": "kCHARACTER_CODE_NATHAN",
+                    "53": "kCHARACTER_CODE_MARISOL",
+                    "54": "kCHARACTER_CODE_TOTAL",
+                    "98": "kCHARACTER_CODE_COMMON_SKILL_REPLAY (예외, 유저 소유 캐릭터 아님)",
+                    "99": "kCHARACTER_CODE_JEFFERSON (예외, 유저 소유 캐릭터 아님)",
+                    "100": "kCHARACTER_CODE_ALL (로그인 용, 실제 게임플레이 캐릭터 아님)"
+                },
+                "note": "코드값 98~100은 일반 플레이 통계에서 제외 필요. 실제 유저 소유 캐릭터만 정규 분석에 포함."
+            },
+            "USE_COUNT": {
+                "type": "INT",
+                "description": "해당 일자/국가/캐릭터 기준 전체 플레이(선택) 횟수",
+                "nullable": false
+            },
+            "3VS3_PLAY_COUNT": {
+                "type": "INT",
+                "description": "3vs3 모드에서의 플레이 횟수",
+                "nullable": false
+            },
+            "1VS1_PLAY_COUNT": {
+                "type": "INT",
+                "description": "1vs1 모드에서의 플레이 횟수",
+                "nullable": false
+            },
+            "3VS3_AVG_WINNING_RATE": {
+                "type": "FLOAT",
+                "description": "3vs3 모드에서의 평균 승률(0~1 또는 0~100, 데이터 설계에 따라 다름)",
+                "nullable": true
+            },
+            "1VS1_AVG_WINNING_RATE": {
+                "type": "FLOAT",
+                "description": "1vs1 모드에서의 평균 승률(0~1 또는 0~100, 데이터 설계에 따라 다름)",
+                "nullable": true
+            }
+        },
+        "usage_notes": [
+            "CHARACTER_CODE 값 매핑은 반드시 최신 enum 순서와 일치해야 함.",
+            "예외 코드(98, 99, 100)는 유저 소유 캐릭터가 아니므로, 집계에서 제외하거나 별도 관리 필요.",
+            "신규 캐릭터 추가/삭제 시 enum 값 업데이트와 테이블 매핑 일치 여부 반드시 점검.",
+            "승률 컬럼(AVG_WINNING_RATE)은 단위(%)인지 비율(0~1)인지 확인 필요."
+        ],
+        "sample_queries": [
+            "-- 최근 30일, 캐릭터별(한국) 평균 승률 및 사용 비율 집계\nSELECT CHARACTER_CODE, AVG(3VS3_AVG_WINNING_RATE) AS AVG_3VS3_WIN, AVG(1VS1_AVG_WINNING_RATE) AS AVG_1VS1_WIN, SUM(USE_COUNT) AS TOTAL_USE\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_CHARACTER_USE]\nWHERE COUNTRY = 'KR' AND REG_DATE >= DATEADD(DAY, -30, GETDATE())\nGROUP BY CHARACTER_CODE\nORDER BY TOTAL_USE DESC;"
+        ],
+        "quality_checks": [
+            "CHARACTER_CODE가 enum 순서와 일치하는지, 코드값 중 예외 코드 포함 여부 점검",
+            "USE_COUNT = 3VS3_PLAY_COUNT + 1VS1_PLAY_COUNT 관계 확인",
+            "AVG_WINNING_RATE 값의 범위 및 단위 일관성(0~1, 0~100 중 혼용 여부 확인)"
+        ],
+        "common_joins": [
+            "CHARACTER_CODE를 캐릭터 마스터 테이블과 조인하여 캐릭터명/등급/속성 등 상세 정보 조회"
+        ]
+    }
+}

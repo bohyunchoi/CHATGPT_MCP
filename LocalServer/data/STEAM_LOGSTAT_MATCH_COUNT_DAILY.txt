@@ -1,0 +1,155 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]": {
+    "description": "Daily match statistics by game mode for Steam games",
+    "columns": {
+        "IDX": {
+            "type": "INT",
+            "description": "Primary key index",
+            "nullable": False
+        },
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date",
+            "nullable": False
+        },
+        "GAME_MODE": {
+            "type": "VARCHAR", 
+            "description": "Game mode identifier - see game_mode_definitions for details",
+            "nullable": False
+        },
+        "MATCH_COUNT": {
+            "type": "INT",
+            "description": "Total number of matches started in this game mode",
+            "nullable": True
+        },
+        "COMPLETE_COUNT": {
+            "type": "INT",
+            "description": "Number of matches completed (not abandoned/disconnected)",
+            "nullable": True
+        }
+    },
+    "game_mode_definitions": {
+        "1": {
+            "name": "1VS1_DEBUG",
+            "description": "1대1 디버그 모드 - 개발/테스트용",
+            "type": "Debug"
+        },
+        "2": {
+            "name": "3VS3",
+            "description": "3대3 팀 매치 - 기본 팀전 모드",
+            "type": "Team"
+        },
+        "3": {
+            "name": "1VS1", 
+            "description": "1대1 개인전 - 실력 대결 모드",
+            "type": "Solo"
+        },
+        "4": {
+            "name": "FREE",
+            "description": "자유 모드 - 캐주얼 플레이",
+            "type": "Casual"
+        },
+        "5": {
+            "name": "ARCADE",
+            "description": "아케이드 모드 - 특별 규칙 적용",
+            "type": "Special"
+        },
+        "6": {
+            "name": "RIN",
+            "description": "RIN 모드 - 특수 게임 모드",
+            "type": "Special"
+        },
+        "7": {
+            "name": "ZOMBIE",
+            "description": "좀비 모드 - PvE 서바이벌",
+            "type": "PvE"
+        },
+        "8": {
+            "name": "CREW",
+            "description": "크루전 - 길드/팀 대항전",
+            "type": "Team"
+        },
+        "9": {
+            "name": "RANK",
+            "description": "랭크전 - 경쟁 순위 모드",
+            "type": "Competitive"
+        },
+        "10": {
+            "name": "CREW_TOURNAMENT",
+            "description": "크루 토너먼트 - 크루 대항 대회",
+            "type": "Tournament"
+        },
+        "11": {
+            "name": "OLYMPIC",
+            "description": "올림픽 모드 - 특별 이벤트",
+            "type": "Event"
+        },
+        "12": {
+            "name": "3VS3_LOW_LEVEL",
+            "description": "3대3 초보자전 - 낮은 레벨 전용",
+            "type": "Beginner"
+        },
+        "13": {
+            "name": "BALANCE_RANK",
+            "description": "밸런스 랭크 - 균형 잡힌 매칭",
+            "type": "Competitive"
+        },
+        "14": {
+            "name": "MAJOR_TOURNAMENT",
+            "description": "메이저 토너먼트 - 공식 대회",
+            "type": "Tournament"
+        },
+        "15": {
+            "name": "USER_TOURNAMENT",
+            "description": "유저 토너먼트 - 사용자 주최 대회",
+            "type": "Tournament"
+        },
+        "16": {
+            "name": "3VS3_BOTH",
+            "description": "3대3 통합 - 모든 레벨 가능",
+            "type": "Team"
+        },
+        "17": {
+            "name": "FREE_RANK",
+            "description": "자유 랭크 - 캐주얼 순위전",
+            "type": "Competitive"
+        },
+        "18": {
+            "name": "FREE_OLYMPIC",
+            "description": "자유 올림픽 - 이벤트 연습",
+            "type": "Event"
+        },
+        "19": {
+            "name": "FREE_BALANCE_RANK",
+            "description": "자유 밸런스 랭크 - 연습용",
+            "type": "Competitive"
+        },
+        "20": {
+            "name": "ULTIMATE_RANK",
+            "description": "얼티밋 랭크 - 최상위 경쟁전",
+            "type": "Competitive"
+        },
+        "21": {
+            "name": "FREE_ULTIMATE_RANK",
+            "description": "자유 얼티밋 랭크 - 연습용",
+            "type": "Competitive"
+        }
+    },
+    "usage_notes": [
+        "Completion rate = COMPLETE_COUNT / MATCH_COUNT * 100",
+        "Low completion rates may indicate game stability or matchmaking issues",
+        "Different game modes may have different typical completion rates",
+        "Useful for identifying problematic game modes or time periods",
+        "Can track popularity of different game modes over time"
+    ],
+    "sample_queries": [
+        "-- Daily match statistics by game mode\nSELECT \n    REG_DATE,\n    GAME_MODE,\n    MATCH_COUNT,\n    COMPLETE_COUNT,\n    ROUND(CAST(COMPLETE_COUNT AS FLOAT) / MATCH_COUNT * 100, 2) as Completion_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]\nWHERE REG_DATE = '2025-06-01'\nORDER BY MATCH_COUNT DESC",
+        
+        "-- Game mode popularity trend (last 7 days)\nSELECT \n    GAME_MODE,\n    SUM(MATCH_COUNT) as Total_Matches,\n    SUM(COMPLETE_COUNT) as Total_Completed,\n    ROUND(CAST(SUM(COMPLETE_COUNT) AS FLOAT) / SUM(MATCH_COUNT) * 100, 2) as Avg_Completion_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]\nWHERE REG_DATE >= DATEADD(DAY, -7, GETDATE())\nGROUP BY GAME_MODE\nORDER BY Total_Matches DESC",
+        
+        "-- Daily completion rate trend by mode\nSELECT \n    REG_DATE,\n    SUM(CASE WHEN GAME_MODE = '9' THEN MATCH_COUNT ELSE 0 END) as Ranked_Matches,\n    SUM(CASE WHEN GAME_MODE = '9' THEN COMPLETE_COUNT ELSE 0 END) as Ranked_Completed,\n    ROUND(CAST(SUM(CASE WHEN GAME_MODE = '9' THEN COMPLETE_COUNT ELSE 0 END) AS FLOAT) / \n          NULLIF(SUM(CASE WHEN GAME_MODE = '9' THEN MATCH_COUNT ELSE 0 END), 0) * 100, 2) as Ranked_Completion_Rate,\n    SUM(CASE WHEN GAME_MODE = '4' THEN MATCH_COUNT ELSE 0 END) as Free_Matches,\n    ROUND(CAST(SUM(CASE WHEN GAME_MODE = '4' THEN COMPLETE_COUNT ELSE 0 END) AS FLOAT) / \n          NULLIF(SUM(CASE WHEN GAME_MODE = '4' THEN MATCH_COUNT ELSE 0 END), 0) * 100, 2) as Free_Completion_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]\nWHERE REG_DATE >= DATEADD(DAY, -30, GETDATE())\nGROUP BY REG_DATE\nORDER BY REG_DATE DESC",
+        
+        "-- Identify problematic periods (low completion rates)\nSELECT \n    REG_DATE,\n    GAME_MODE,\n    MATCH_COUNT,\n    COMPLETE_COUNT,\n    ROUND(CAST(COMPLETE_COUNT AS FLOAT) / MATCH_COUNT * 100, 2) as Completion_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]\nWHERE CAST(COMPLETE_COUNT AS FLOAT) / MATCH_COUNT < 0.7  -- Less than 70% completion\n    AND MATCH_COUNT > 100  -- Significant volume\n    AND REG_DATE >= DATEADD(DAY, -7, GETDATE())\nORDER BY Completion_Rate ASC, REG_DATE DESC",
+        
+        "-- Game mode mapping reference\nSELECT \n    REG_DATE,\n    GAME_MODE,\n    CASE GAME_MODE\n        WHEN '1' THEN '1VS1_DEBUG'\n        WHEN '2' THEN '3VS3'\n        WHEN '3' THEN '1VS1'\n        WHEN '4' THEN 'FREE'\n        WHEN '5' THEN 'ARCADE'\n        WHEN '6' THEN 'RIN'\n        WHEN '7' THEN 'ZOMBIE'\n        WHEN '8' THEN 'CREW'\n        WHEN '9' THEN 'RANK'\n        WHEN '10' THEN 'CREW_TOURNAMENT'\n        WHEN '11' THEN 'OLYMPIC'\n        WHEN '12' THEN '3VS3_LOW_LEVEL'\n        WHEN '13' THEN 'BALANCE_RANK'\n        WHEN '14' THEN 'MAJOR_TOURNAMENT'\n        WHEN '15' THEN 'USER_TOURNAMENT'\n        WHEN '16' THEN '3VS3_BOTH'\n        WHEN '17' THEN 'FREE_RANK'\n        WHEN '18' THEN 'FREE_OLYMPIC'\n        WHEN '19' THEN 'FREE_BALANCE_RANK'\n        WHEN '20' THEN 'ULTIMATE_RANK'\n        WHEN '21' THEN 'FREE_ULTIMATE_RANK'\n        ELSE 'UNKNOWN'\n    END as Mode_Name,\n    MATCH_COUNT,\n    COMPLETE_COUNT,\n    ROUND(CAST(COMPLETE_COUNT AS FLOAT) / MATCH_COUNT * 100, 2) as Completion_Rate\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_MATCH_COUNT_DAILY]\nWHERE REG_DATE = '2025-06-01'\nORDER BY MATCH_COUNT DESC"
+    ]
+}

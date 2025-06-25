@@ -1,0 +1,71 @@
+"[STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY]": {
+    "description": "Monthly user distribution by connection time ranges for Steam games",
+    "columns": {
+        "REG_DATE": {
+            "type": "DATETIME",
+            "description": "Statistics aggregation date (typically first or last day of month)",
+            "nullable": False
+        },
+        "COUNTRY": {
+            "type": "VARCHAR",
+            "description": "Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents overall total)",
+            "nullable": False
+        },
+        "ACTIVE_USER_COUNT": {
+            "type": "INT",
+            "description": "Total active user count for the month (MAU)",
+            "nullable": True
+        },
+        "COUNT_5": {
+            "type": "INT",
+            "description": "Users with average daily connection time less than 5 minutes",
+            "nullable": True
+        },
+        "COUNT_5_10": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 5-10 minutes",
+            "nullable": True
+        },
+        "COUNT_10_30": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 10-30 minutes",
+            "nullable": True
+        },
+        "COUNT_30_60": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 30-60 minutes",
+            "nullable": True
+        },
+        "COUNT_60_120": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 60-120 minutes (1-2 hours)",
+            "nullable": True
+        },
+        "COUNT_120_240": {
+            "type": "INT",
+            "description": "Users with average daily connection time between 120-240 minutes (2-4 hours)",
+            "nullable": True
+        },
+        "COUNT_240": {
+            "type": "INT",
+            "description": "Users with average daily connection time over 240 minutes (4+ hours)",
+            "nullable": True
+        }
+    },
+    "usage_notes": [
+        "Represents monthly aggregation based on users' average daily connection time",
+        "Each user is counted once per month in their primary time range",
+        "Useful for long-term engagement pattern analysis",
+        "Time ranges reflect average daily behavior over the month",
+        "Can track user migration between engagement levels"
+    ],
+    "sample_queries": [
+        "-- Monthly engagement distribution\nSELECT \n    REG_DATE,\n    ACTIVE_USER_COUNT as MAU,\n    ROUND(CAST(COUNT_5 + COUNT_5_10 + COUNT_10_30 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Light_User_Pct,\n    ROUND(CAST(COUNT_30_60 + COUNT_60_120 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Medium_User_Pct,\n    ROUND(CAST(COUNT_120_240 + COUNT_240 AS FLOAT) / ACTIVE_USER_COUNT * 100, 2) as Heavy_User_Pct\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY]\nWHERE COUNTRY = '_TOTAL' \n    AND REG_DATE >= DATEADD(MONTH, -12, GETDATE())\nORDER BY REG_DATE DESC",
+        
+        "-- Year-over-Year engagement comparison\nSELECT \n    YEAR(REG_DATE) as Year,\n    MONTH(REG_DATE) as Month,\n    SUM(COUNT_240) as Hardcore_Users,\n    SUM(ACTIVE_USER_COUNT) as Total_MAU,\n    ROUND(CAST(SUM(COUNT_240) AS FLOAT) / SUM(ACTIVE_USER_COUNT) * 100, 2) as Hardcore_Ratio\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY]\nWHERE COUNTRY = '_TOTAL'\n    AND MONTH(REG_DATE) = MONTH(GETDATE())\n    AND YEAR(REG_DATE) IN (YEAR(GETDATE())-1, YEAR(GETDATE()))\nGROUP BY YEAR(REG_DATE), MONTH(REG_DATE)",
+        
+        "-- Country-wise engagement health score\nWITH EngagementScore AS (\n    SELECT \n        COUNTRY,\n        REG_DATE,\n        -- Higher weight for longer play time\n        (COUNT_5 * 0.1 + COUNT_5_10 * 0.2 + COUNT_10_30 * 0.5 + \n         COUNT_30_60 * 1.0 + COUNT_60_120 * 2.0 + \n         COUNT_120_240 * 3.0 + COUNT_240 * 4.0) / ACTIVE_USER_COUNT as Score\n    FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY]\n    WHERE REG_DATE = (SELECT MAX(REG_DATE) FROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY])\n        AND COUNTRY != '_TOTAL'\n)\nSELECT \n    COUNTRY,\n    ROUND(Score, 2) as Engagement_Score,\n    RANK() OVER (ORDER BY Score DESC) as Rank\nFROM EngagementScore\nORDER BY Score DESC",
+        
+        "-- User lifecycle analysis\nSELECT \n    a.REG_DATE,\n    a.ACTIVE_USER_COUNT as Current_MAU,\n    b.ACTIVE_USER_COUNT as Previous_MAU,\n    -- Users moving to higher engagement\n    (a.COUNT_120_240 + a.COUNT_240) - (b.COUNT_120_240 + b.COUNT_240) as Heavy_User_Growth\nFROM [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY] a\nJOIN [STEAM_LOG_REPL].[SC_FS2].[LOGSTAT_USER_CONNECTTIME_MONTHLY] b\n    ON a.COUNTRY = b.COUNTRY \n    AND b.REG_DATE = DATEADD(MONTH, -1, a.REG_DATE)\nWHERE a.COUNTRY = '_TOTAL'\n    AND a.REG_DATE >= DATEADD(MONTH, -6, GETDATE())\nORDER BY a.REG_DATE DESC"
+    ]
+}
