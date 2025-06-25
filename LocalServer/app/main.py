@@ -7,6 +7,7 @@ from app.utils import get_ngrok_url
 from app.routers import (
     file_ops, bat_ops, listing, github, db
 )
+from app.routers import mail
 
 NGROK_URL = get_ngrok_url()
 
@@ -51,6 +52,7 @@ app.include_router(bat_ops.router)
 app.include_router(listing.router)
 app.include_router(github.router)
 app.include_router(db.router)
+app.include_router(mail.router)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
