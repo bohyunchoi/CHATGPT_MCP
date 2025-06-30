@@ -1,7 +1,7 @@
 # app/routers/db.py
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from app.utils import get_db_connection
 import logging
 import os
@@ -19,6 +19,7 @@ router = APIRouter(tags=["db"])
 
 class QueryReq(BaseModel):
     query: str
+    database: Optional[str] = None
 
 class QueryFileReq(QueryReq):
     filename: str
@@ -116,7 +117,7 @@ def run_query(req: QueryReq):
     logger.info("📡 SQL 쿼리 실행 요청")
     logger.debug(f"📝 쿼리 내용: {req.query}")
     try:
-        conn = get_db_connection("STEAM_GAME")
+        conn = get_db_connection(req.database or "STEAM_GAME")
         logger.debug("✅ DB 연결 성공")
         cur = conn.cursor()
         cur.execute(req.query)
@@ -139,7 +140,7 @@ def run_query_to_file(req: QueryFileReq):
     logger.info("📡 SQL 쿼리 실행 및 파일 저장 요청")
     logger.debug(f"📝 쿼리 내용: {req.query}")
     try:
-        conn = get_db_connection("STEAM_GAME")
+        conn = get_db_connection(req.database or "STEAM_GAME")
         logger.debug("✅ DB 연결 성공")
         cur = conn.cursor()
         cur.execute(req.query)
