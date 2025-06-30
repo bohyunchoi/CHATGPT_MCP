@@ -9,7 +9,9 @@ from app.routers import (
 )
 from app.routers import mail
 
-NGROK_URL = get_ngrok_url()
+# Allow a few more retries when resolving the ngrok URL so the server can
+# start even if the tunnel is not immediately ready.
+NGROK_URL = get_ngrok_url(retries=10)
 
 app = FastAPI(
     title="3on3 MCP File Pipeline",
