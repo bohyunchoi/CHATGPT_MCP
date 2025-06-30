@@ -1,34 +1,20 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: 스크립트 위치가 프로젝트 루트(…\LocalServer)라고 가정
 set ROOT_DIR=%~dp0
+
+:: (선택) 가상환경 활성화, 가상환경이 있다면
+:: call "%ROOT_DIR%\.venv\Scripts\activate"
+
+:: 프로젝트 루트로 이동
 cd /d "%ROOT_DIR%"
 
-:: DB connection settings
-IF NOT DEFINED MSSQL_SERVER set "MSSQL_SERVER=10.31.20.6"
-IF NOT DEFINED MSSQL_USER set "MSSQL_USER=sa"
-IF NOT DEFINED MSSQL_PASSWORD set "MSSQL_PASSWORD=f$ei#L!sa"
-IF NOT DEFINED MSSQL_DATABASE set "MSSQL_DATABASE=master"
+:: Python -m 으로 패키지 실행 (app.main 으로)
+start "" cmd /k "python -m app.main"
 
-:: Start ngrok first so that the FastAPI server advertises the public URL
-echo [INFO] Starting ngrok...
-start "ngrok" "%ROOT_DIR%ngrok.exe" http 8000 > "%ROOT_DIR%ngrok.log" 2>&1
+:: 또는 Uvicorn 직접 실행
+:: start "" cmd /k "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"
 
-set /a NGROK_WAIT=0
-:WAIT_NGROK
-set /a NGROK_WAIT+=1
-for /f "delims=" %%A in ('powershell -Command "(Invoke-RestMethod -ErrorAction SilentlyContinue -Uri http://127.0.0.1:4040/api/tunnels).tunnels[0].public_url"') do set NGROK_URL=%%A
-if not defined NGROK_URL (
-    if %NGROK_WAIT% GEQ 30 (
-        echo [WARN] ngrok tunnel not detected. Continuing...
-    ) else (
-        timeout /t 1 >nul
-        goto WAIT_NGROK
-    )
-)
-
-echo [INFO] Launching application...
-start "app" cmd /k "python -m app.main"
-
-echo [INFO] Server started.
+echo [완료] 서버를 시작했습니다.
 pause

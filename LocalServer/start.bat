@@ -20,18 +20,23 @@ REM === 4. 기존 프로세스 종료(선택사항, 이미 실행중일 경우 �
 REM taskkill /im python.exe /f >nul 2>&1
 REM taskkill /im uvicorn.exe /f >nul 2>&1
 
-REM === 5. ngrok 실행 (순서 변경)
-start "" cmd /k "python app\ngrok_Start.py"
+
 
 echo [완료] ngrok이 실행되었습니다.
 
-REM === 6. ngrok이 완전히 뜨길 기다림(10초 대기, 필요시 늘릴 수 있음)
-timeout /t 10 >nul
+
 
 REM === 7. 서버 실행
 start "" cmd /k "python -m app.main"
 REM 또는 uvicorn 직접 실행시 (아래 주석 해제)
 REM start "" cmd /k "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"
+
+
+REM === 6. ngrok이 완전히 뜨길 기다림(10초 대기, 필요시 늘릴 수 있음)
+timeout /t 10 >nul
+
+REM === 5. ngrok 실행 (순서 변경)
+start "" cmd /k "python app\ngrok_Start.py"
 
 echo [완료] 서버를 시작했습니다.
 
