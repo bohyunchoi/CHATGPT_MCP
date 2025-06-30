@@ -1,0 +1,426 @@
+2025-06-25 15:16:44,040 Opening tunnel named: http-8000-a5b2ff1a-c8fe-444b-b0bd-7531b3e00923
+2025-06-25 15:16:46,210 t=2025-06-25T15:16:46+0900 lvl=info msg="no configuration paths supplied"
+2025-06-25 15:16:46,210 t=2025-06-25T15:16:46+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-25 15:16:46,211 t=2025-06-25T15:16:46+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-25 15:16:46,239 t=2025-06-25T15:16:46+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-25 15:16:46,974 t=2025-06-25T15:16:46+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-25 15:16:46,975 t=2025-06-25T15:16:46+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-25 15:16:46,980 t=2025-06-25T15:16:46+0900 lvl=info msg=start pg=/api/tunnels id=ddb87ed32c8992a9
+2025-06-25 15:16:46,980 t=2025-06-25T15:16:46+0900 lvl=info msg=end pg=/api/tunnels id=ddb87ed32c8992a9 status=200 dur=0s
+2025-06-25 15:16:46,982 t=2025-06-25T15:16:46+0900 lvl=info msg=start pg=/api/tunnels id=06fa34151cb2f9c7
+2025-06-25 15:16:46,982 t=2025-06-25T15:16:46+0900 lvl=info msg=end pg=/api/tunnels id=06fa34151cb2f9c7 status=200 dur=0s
+2025-06-25 15:16:46,985 t=2025-06-25T15:16:46+0900 lvl=info msg=start pg=/api/tunnels id=4e00af1ddb56bec9
+2025-06-25 15:16:46,985 t=2025-06-25T15:16:46+0900 lvl=info msg=end pg=/api/tunnels id=4e00af1ddb56bec9 status=200 dur=0s
+2025-06-25 15:16:46,988 t=2025-06-25T15:16:46+0900 lvl=info msg=start pg=/api/tunnels id=e4d27d83c6411b83
+2025-06-25 15:16:47,043 t=2025-06-25T15:16:47+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-a5b2ff1a-c8fe-444b-b0bd-7531b3e00923 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-25 15:16:47,044 t=2025-06-25T15:16:47+0900 lvl=info msg=end pg=/api/tunnels id=e4d27d83c6411b83 status=201 dur=55.1797ms
+2025-06-25 15:16:47,044 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-25 15:16:47,044 Starting server. Press Ctrl+C to stop.
+2025-06-25 15:16:49,929 t=2025-06-25T15:16:49+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-25 15:16:49,930 t=2025-06-25T15:16:49+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-25 15:30:31,895 Opening tunnel named: http-8000-0e3efee0-168e-4191-a06e-9377b3dfb818
+2025-06-25 15:30:33,930 t=2025-06-25T15:30:33+0900 lvl=info msg="no configuration paths supplied"
+2025-06-25 15:30:33,930 t=2025-06-25T15:30:33+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-25 15:30:33,930 t=2025-06-25T15:30:33+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-25 15:30:33,959 t=2025-06-25T15:30:33+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-25 15:30:34,199 t=2025-06-25T15:30:34+0900 lvl=info msg=start pg=/api/tunnels id=2d41e7d9a86f9145
+2025-06-25 15:30:34,200 t=2025-06-25T15:30:34+0900 lvl=info msg=end pg=/api/tunnels id=2d41e7d9a86f9145 status=200 dur=556.8쨉s
+2025-06-25 15:30:34,718 t=2025-06-25T15:30:34+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-25 15:30:34,719 t=2025-06-25T15:30:34+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-25 15:30:34,723 t=2025-06-25T15:30:34+0900 lvl=info msg=start pg=/api/tunnels id=7b0a769e2d87d7b7
+2025-06-25 15:30:34,724 t=2025-06-25T15:30:34+0900 lvl=info msg=end pg=/api/tunnels id=7b0a769e2d87d7b7 status=200 dur=0s
+2025-06-25 15:30:34,725 t=2025-06-25T15:30:34+0900 lvl=info msg=start pg=/api/tunnels id=bf03f9cd1bf5d76e
+2025-06-25 15:30:34,726 t=2025-06-25T15:30:34+0900 lvl=info msg=end pg=/api/tunnels id=bf03f9cd1bf5d76e status=200 dur=0s
+2025-06-25 15:30:34,728 t=2025-06-25T15:30:34+0900 lvl=info msg=start pg=/api/tunnels id=8b5616fef6ddb153
+2025-06-25 15:30:34,729 t=2025-06-25T15:30:34+0900 lvl=info msg=end pg=/api/tunnels id=8b5616fef6ddb153 status=200 dur=0s
+2025-06-25 15:30:34,731 t=2025-06-25T15:30:34+0900 lvl=info msg=start pg=/api/tunnels id=97ed1cc4f49adbf8
+2025-06-25 15:30:34,859 t=2025-06-25T15:30:34+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-0e3efee0-168e-4191-a06e-9377b3dfb818 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-25 15:30:34,859 t=2025-06-25T15:30:34+0900 lvl=info msg=end pg=/api/tunnels id=97ed1cc4f49adbf8 status=201 dur=127.4892ms
+2025-06-25 15:30:34,860 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-25 15:30:34,860 Starting server. Press Ctrl+C to stop.
+2025-06-25 15:31:12,351 t=2025-06-25T15:31:12+0900 lvl=info msg="join connections" obj=join id=2f956132f3ce l=127.0.0.1:8000 r=57.154.174.126:21249
+2025-06-25 15:34:08,756 t=2025-06-25T15:34:08+0900 lvl=info msg=start pg=/api/tunnels id=b78cdb6d34daf2b1
+2025-06-25 15:34:08,758 t=2025-06-25T15:34:08+0900 lvl=info msg=end pg=/api/tunnels id=b78cdb6d34daf2b1 status=200 dur=0s
+2025-06-25 15:34:08,870 t=2025-06-25T15:34:08+0900 lvl=info msg=start pg=/api/tunnels id=b3afdaf8c6d5fc7c
+2025-06-25 15:34:08,871 t=2025-06-25T15:34:08+0900 lvl=info msg=end pg=/api/tunnels id=b3afdaf8c6d5fc7c status=200 dur=0s
+2025-06-25 15:34:16,244 t=2025-06-25T15:34:16+0900 lvl=info msg=start pg=/api/tunnels id=17a33cdd255081d5
+2025-06-25 15:34:16,245 t=2025-06-25T15:34:16+0900 lvl=info msg=end pg=/api/tunnels id=17a33cdd255081d5 status=200 dur=0s
+2025-06-25 15:34:16,359 t=2025-06-25T15:34:16+0900 lvl=info msg=start pg=/api/tunnels id=e2ae72021c755dbf
+2025-06-25 15:34:16,359 t=2025-06-25T15:34:16+0900 lvl=info msg=end pg=/api/tunnels id=e2ae72021c755dbf status=200 dur=0s
+2025-06-25 15:35:39,644 t=2025-06-25T15:35:39+0900 lvl=info msg=start pg=/api/tunnels id=a5a5d4bae767bd7d
+2025-06-25 15:35:39,645 t=2025-06-25T15:35:39+0900 lvl=info msg=end pg=/api/tunnels id=a5a5d4bae767bd7d status=200 dur=0s
+2025-06-25 15:35:39,754 t=2025-06-25T15:35:39+0900 lvl=info msg=start pg=/api/tunnels id=7b3c1eef1eb8477e
+2025-06-25 15:35:39,755 t=2025-06-25T15:35:39+0900 lvl=info msg=end pg=/api/tunnels id=7b3c1eef1eb8477e status=200 dur=58쨉s
+2025-06-25 15:35:49,700 t=2025-06-25T15:35:49+0900 lvl=info msg=start pg=/api/tunnels id=4558179f9050bb24
+2025-06-25 15:35:49,701 t=2025-06-25T15:35:49+0900 lvl=info msg=end pg=/api/tunnels id=4558179f9050bb24 status=200 dur=0s
+2025-06-25 15:35:49,810 t=2025-06-25T15:35:49+0900 lvl=info msg=start pg=/api/tunnels id=703677d0aa8173d9
+2025-06-25 15:35:49,810 t=2025-06-25T15:35:49+0900 lvl=info msg=end pg=/api/tunnels id=703677d0aa8173d9 status=200 dur=1.0472ms
+2025-06-25 15:37:16,739 t=2025-06-25T15:37:16+0900 lvl=info msg="join connections" obj=join id=e82b08803d6a l=127.0.0.1:8000 r=20.228.106.176:32681
+2025-06-25 15:38:50,475 t=2025-06-25T15:38:50+0900 lvl=info msg=start pg=/api/tunnels id=9a343630f479da71
+2025-06-25 15:38:50,475 t=2025-06-25T15:38:50+0900 lvl=info msg=end pg=/api/tunnels id=9a343630f479da71 status=200 dur=0s
+2025-06-25 15:38:50,641 t=2025-06-25T15:38:50+0900 lvl=info msg=start pg=/api/tunnels id=99b4caa666be46dc
+2025-06-25 15:38:50,642 t=2025-06-25T15:38:50+0900 lvl=info msg=end pg=/api/tunnels id=99b4caa666be46dc status=200 dur=0s
+2025-06-25 15:38:58,870 t=2025-06-25T15:38:58+0900 lvl=info msg="join connections" obj=join id=96f15144b8c5 l=127.0.0.1:8000 r=20.228.106.189:41560
+2025-06-25 15:48:12,765 t=2025-06-25T15:48:12+0900 lvl=info msg=start pg=/api/tunnels id=2239edbf734c768e
+2025-06-25 15:48:12,766 t=2025-06-25T15:48:12+0900 lvl=info msg=end pg=/api/tunnels id=2239edbf734c768e status=200 dur=0s
+2025-06-25 15:48:12,884 t=2025-06-25T15:48:12+0900 lvl=info msg=start pg=/api/tunnels id=b226562848943337
+2025-06-25 15:48:12,884 t=2025-06-25T15:48:12+0900 lvl=info msg=end pg=/api/tunnels id=b226562848943337 status=200 dur=0s
+2025-06-25 15:54:06,781 t=2025-06-25T15:54:06+0900 lvl=info msg="join connections" obj=join id=392cc20121e1 l=127.0.0.1:8000 r=20.228.106.176:54557
+2025-06-25 15:54:10,323 t=2025-06-25T15:54:10+0900 lvl=info msg="join connections" obj=join id=f65af9c70def l=127.0.0.1:8000 r=20.228.106.187:61152
+2025-06-25 15:54:16,510 t=2025-06-25T15:54:16+0900 lvl=info msg="join connections" obj=join id=6c764806f410 l=127.0.0.1:8000 r=20.228.106.185:31333
+2025-06-25 15:54:21,008 t=2025-06-25T15:54:21+0900 lvl=info msg="join connections" obj=join id=41d43a6afa55 l=127.0.0.1:8000 r=20.228.106.179:26297
+2025-06-25 15:55:51,807 t=2025-06-25T15:55:51+0900 lvl=info msg="join connections" obj=join id=6ed3aef4077c l=127.0.0.1:8000 r=20.228.106.181:16136
+2025-06-25 15:57:36,987 t=2025-06-25T15:57:36+0900 lvl=info msg=start pg=/api/tunnels id=f44c90d8ba8eea98
+2025-06-25 15:57:36,987 t=2025-06-25T15:57:36+0900 lvl=info msg=end pg=/api/tunnels id=f44c90d8ba8eea98 status=200 dur=0s
+2025-06-25 15:57:37,143 t=2025-06-25T15:57:37+0900 lvl=info msg=start pg=/api/tunnels id=564f51c415a2aea1
+2025-06-25 15:57:37,144 t=2025-06-25T15:57:37+0900 lvl=info msg=end pg=/api/tunnels id=564f51c415a2aea1 status=200 dur=0s
+2025-06-25 15:59:24,030 t=2025-06-25T15:59:24+0900 lvl=info msg="join connections" obj=join id=2052ce778a6e l=127.0.0.1:8000 r=20.228.106.184:50088
+2025-06-25 15:59:53,533 t=2025-06-25T15:59:53+0900 lvl=info msg="join connections" obj=join id=ca04f32ac414 l=127.0.0.1:8000 r=20.228.106.178:53108
+2025-06-25 16:00:27,456 t=2025-06-25T16:00:27+0900 lvl=info msg=start pg=/api/tunnels id=02809d45debbc281
+2025-06-25 16:00:27,457 t=2025-06-25T16:00:27+0900 lvl=info msg=end pg=/api/tunnels id=02809d45debbc281 status=200 dur=0s
+2025-06-25 16:00:27,577 t=2025-06-25T16:00:27+0900 lvl=info msg=start pg=/api/tunnels id=fbbae26c3b8b2b1a
+2025-06-25 16:00:27,578 t=2025-06-25T16:00:27+0900 lvl=info msg=end pg=/api/tunnels id=fbbae26c3b8b2b1a status=200 dur=0s
+2025-06-25 16:00:36,738 t=2025-06-25T16:00:36+0900 lvl=info msg="join connections" obj=join id=8f812ef79792 l=127.0.0.1:8000 r=20.228.106.176:11876
+2025-06-25 16:01:26,504 t=2025-06-25T16:01:26+0900 lvl=info msg="join connections" obj=join id=096726429cde l=127.0.0.1:8000 r=20.228.106.190:52796
+2025-06-25 16:02:10,003 t=2025-06-25T16:02:10+0900 lvl=info msg="join connections" obj=join id=793da4662b74 l=127.0.0.1:8000 r=20.228.106.186:3582
+2025-06-25 16:04:42,145 t=2025-06-25T16:04:42+0900 lvl=info msg="join connections" obj=join id=b3386308ba83 l=127.0.0.1:8000 r=20.228.106.184:29879
+2025-06-25 16:05:07,136 t=2025-06-25T16:05:07+0900 lvl=info msg="join connections" obj=join id=916c19b57a3c l=127.0.0.1:8000 r=20.228.106.180:38223
+2025-06-25 16:05:38,606 t=2025-06-25T16:05:38+0900 lvl=info msg="join connections" obj=join id=8d6b50ccea2f l=127.0.0.1:8000 r=20.228.106.187:2213
+2025-06-25 16:12:27,375 t=2025-06-25T16:12:27+0900 lvl=info msg="join connections" obj=join id=880ee1a9e23b l=127.0.0.1:8000 r=20.228.106.191:14323
+2025-06-25 16:13:43,428 t=2025-06-25T16:13:43+0900 lvl=info msg="join connections" obj=join id=50a75336da26 l=127.0.0.1:8000 r=20.228.106.189:54900
+2025-06-25 16:34:55,085 t=2025-06-25T16:34:55+0900 lvl=info msg="join connections" obj=join id=498efd6243fe l=127.0.0.1:8000 r=20.228.106.189:57139
+2025-06-25 16:35:39,095 t=2025-06-25T16:35:39+0900 lvl=info msg="join connections" obj=join id=87d935914477 l=127.0.0.1:8000 r=20.228.106.190:7971
+2025-06-25 16:38:49,318 t=2025-06-25T16:38:49+0900 lvl=info msg="join connections" obj=join id=6f93c5b05b2d l=127.0.0.1:8000 r=172.183.143.228:42499
+2025-06-25 16:39:02,073 t=2025-06-25T16:39:02+0900 lvl=info msg="join connections" obj=join id=f619e4f1376e l=127.0.0.1:8000 r=172.183.143.228:41653
+2025-06-25 16:39:19,973 t=2025-06-25T16:39:19+0900 lvl=info msg="join connections" obj=join id=c1bb3b863ac0 l=127.0.0.1:8000 r=172.183.143.236:60235
+2025-06-25 16:43:20,959 t=2025-06-25T16:43:20+0900 lvl=info msg="join connections" obj=join id=7078b140be27 l=127.0.0.1:8000 r=172.183.143.229:18822
+2025-06-25 16:44:19,827 t=2025-06-25T16:44:19+0900 lvl=info msg="join connections" obj=join id=c0947717deef l=127.0.0.1:8000 r=172.183.143.228:17943
+2025-06-25 16:46:19,088 t=2025-06-25T16:46:19+0900 lvl=info msg="join connections" obj=join id=81a4df4e9391 l=127.0.0.1:8000 r=172.183.143.233:26681
+2025-06-25 16:51:54,274 t=2025-06-25T16:51:54+0900 lvl=info msg="join connections" obj=join id=4125d8fc095d l=127.0.0.1:8000 r=172.183.143.232:32033
+2025-06-25 16:52:57,224 t=2025-06-25T16:52:57+0900 lvl=info msg="join connections" obj=join id=006d055e69e0 l=127.0.0.1:8000 r=172.183.143.226:46981
+2025-06-25 16:54:33,210 t=2025-06-25T16:54:33+0900 lvl=info msg="join connections" obj=join id=ef5d3ea6def8 l=127.0.0.1:8000 r=172.183.143.237:38463
+2025-06-25 17:19:00,367 t=2025-06-25T17:19:00+0900 lvl=info msg=start pg=/api/tunnels id=ad55768c43030451
+2025-06-25 17:19:00,368 t=2025-06-25T17:19:00+0900 lvl=info msg=end pg=/api/tunnels id=ad55768c43030451 status=200 dur=0s
+2025-06-25 17:19:00,545 t=2025-06-25T17:19:00+0900 lvl=info msg=start pg=/api/tunnels id=362bdbfd7d9d51cd
+2025-06-25 17:19:00,546 t=2025-06-25T17:19:00+0900 lvl=info msg=end pg=/api/tunnels id=362bdbfd7d9d51cd status=200 dur=0s
+2025-06-25 17:26:27,505 t=2025-06-25T17:26:27+0900 lvl=info msg="join connections" obj=join id=fc907ce3282c l=127.0.0.1:8000 r=172.183.143.229:20246
+2025-06-25 17:26:41,119 t=2025-06-25T17:26:41+0900 lvl=info msg="join connections" obj=join id=875edb741d00 l=127.0.0.1:8000 r=172.183.143.236:17393
+2025-06-25 17:26:46,656 t=2025-06-25T17:26:46+0900 lvl=info msg="join connections" obj=join id=d54ec7173bc3 l=127.0.0.1:8000 r=172.183.143.239:39871
+2025-06-25 17:26:49,712 t=2025-06-25T17:26:49+0900 lvl=info msg="join connections" obj=join id=86a1c851629d l=127.0.0.1:8000 r=172.183.143.237:34742
+2025-06-25 17:26:54,809 t=2025-06-25T17:26:54+0900 lvl=info msg="join connections" obj=join id=4a9858aaa661 l=127.0.0.1:8000 r=172.183.143.237:63381
+2025-06-25 17:27:04,982 t=2025-06-25T17:27:04+0900 lvl=info msg="join connections" obj=join id=d3e5ea6734ed l=127.0.0.1:8000 r=172.183.143.233:19018
+2025-06-25 17:28:25,907 t=2025-06-25T17:28:25+0900 lvl=info msg=start pg=/api/tunnels id=ced2327cb88594f7
+2025-06-25 17:28:25,907 t=2025-06-25T17:28:25+0900 lvl=info msg=end pg=/api/tunnels id=ced2327cb88594f7 status=200 dur=1.019ms
+2025-06-25 17:28:26,038 t=2025-06-25T17:28:26+0900 lvl=info msg=start pg=/api/tunnels id=3edfa9c547cfe93f
+2025-06-25 17:28:26,039 t=2025-06-25T17:28:26+0900 lvl=info msg=end pg=/api/tunnels id=3edfa9c547cfe93f status=200 dur=0s
+2025-06-25 17:28:51,755 t=2025-06-25T17:28:51+0900 lvl=info msg="join connections" obj=join id=44c906870f75 l=127.0.0.1:8000 r=172.183.143.234:65052
+2025-06-25 17:28:55,630 t=2025-06-25T17:28:55+0900 lvl=info msg="join connections" obj=join id=6875b423ffc1 l=127.0.0.1:8000 r=172.183.143.224:58579
+2025-06-25 17:28:57,396 t=2025-06-25T17:28:57+0900 lvl=info msg="join connections" obj=join id=d8e797bafc6f l=127.0.0.1:8000 r=172.183.143.229:8310
+2025-06-25 17:30:58,769 t=2025-06-25T17:30:58+0900 lvl=info msg=start pg=/api/tunnels id=09aecd5855dfef24
+2025-06-25 17:30:58,769 t=2025-06-25T17:30:58+0900 lvl=info msg=end pg=/api/tunnels id=09aecd5855dfef24 status=200 dur=0s
+2025-06-25 17:30:58,886 t=2025-06-25T17:30:58+0900 lvl=info msg=start pg=/api/tunnels id=c878daba69a8fc55
+2025-06-25 17:30:58,886 t=2025-06-25T17:30:58+0900 lvl=info msg=end pg=/api/tunnels id=c878daba69a8fc55 status=200 dur=0s
+2025-06-25 17:31:24,896 t=2025-06-25T17:31:24+0900 lvl=info msg="join connections" obj=join id=072d3d1a0eab l=127.0.0.1:8000 r=172.183.143.239:31430
+2025-06-25 17:32:59,373 t=2025-06-25T17:32:59+0900 lvl=info msg="join connections" obj=join id=9fd7848001fe l=127.0.0.1:8000 r=172.183.143.236:64820
+2025-06-25 17:34:03,933 t=2025-06-25T17:34:03+0900 lvl=info msg="join connections" obj=join id=d53def7a545d l=127.0.0.1:8000 r=172.183.143.231:62170
+2025-06-25 17:34:10,808 t=2025-06-25T17:34:10+0900 lvl=info msg="join connections" obj=join id=5cd78b7aee37 l=127.0.0.1:8000 r=172.183.143.232:61511
+2025-06-25 17:35:35,311 t=2025-06-25T17:35:35+0900 lvl=info msg="join connections" obj=join id=4f6a886b3741 l=127.0.0.1:8000 r=172.183.143.226:50808
+2025-06-25 17:36:22,873 t=2025-06-25T17:36:22+0900 lvl=info msg="join connections" obj=join id=7c5bdcca984a l=127.0.0.1:8000 r=172.183.143.234:42115
+2025-06-25 17:36:32,249 t=2025-06-25T17:36:32+0900 lvl=info msg="join connections" obj=join id=cfa9f375c92d l=127.0.0.1:8000 r=172.183.143.231:43053
+2025-06-25 17:36:40,913 t=2025-06-25T17:36:40+0900 lvl=info msg="join connections" obj=join id=1f6ebfc0cd44 l=127.0.0.1:8000 r=172.183.143.238:19970
+2025-06-25 17:42:23,670 t=2025-06-25T17:42:23+0900 lvl=info msg=start pg=/api/tunnels id=6d09146bfef27e49
+2025-06-25 17:42:23,671 t=2025-06-25T17:42:23+0900 lvl=info msg=end pg=/api/tunnels id=6d09146bfef27e49 status=200 dur=0s
+2025-06-25 17:42:23,789 t=2025-06-25T17:42:23+0900 lvl=info msg=start pg=/api/tunnels id=bb6dc6577bda9a5e
+2025-06-25 17:42:23,790 t=2025-06-25T17:42:23+0900 lvl=info msg=end pg=/api/tunnels id=bb6dc6577bda9a5e status=200 dur=0s
+2025-06-25 17:43:04,839 t=2025-06-25T17:43:04+0900 lvl=info msg="join connections" obj=join id=c4f3ba1c13fa l=127.0.0.1:8000 r=74.7.36.91:22500
+2025-06-25 17:43:50,682 t=2025-06-25T17:43:50+0900 lvl=info msg="join connections" obj=join id=f1e2b42a5e10 l=127.0.0.1:8000 r=74.7.36.86:50249
+2025-06-25 17:43:55,249 t=2025-06-25T17:43:55+0900 lvl=info msg="join connections" obj=join id=8f15088897be l=127.0.0.1:8000 r=74.7.36.85:37584
+2025-06-25 17:45:33,205 t=2025-06-25T17:45:33+0900 lvl=info msg="join connections" obj=join id=28a42f36c711 l=127.0.0.1:8000 r=74.7.36.85:9397
+2025-06-25 18:02:23,283 t=2025-06-25T18:02:23+0900 lvl=info msg="join connections" obj=join id=04a052b15831 l=127.0.0.1:8000 r=74.7.36.87:18089
+2025-06-25 18:03:29,069 t=2025-06-25T18:03:29+0900 lvl=info msg="join connections" obj=join id=f3dd79aaed08 l=127.0.0.1:8000 r=74.7.36.92:23988
+2025-06-25 18:08:35,874 t=2025-06-25T18:08:35+0900 lvl=info msg=start pg=/api/tunnels id=62d1ad7e02f4b5ec
+2025-06-25 18:08:35,874 t=2025-06-25T18:08:35+0900 lvl=info msg=end pg=/api/tunnels id=62d1ad7e02f4b5ec status=200 dur=0s
+2025-06-25 18:08:36,005 t=2025-06-25T18:08:36+0900 lvl=info msg=start pg=/api/tunnels id=5c7b20287413c9ea
+2025-06-25 18:08:36,005 t=2025-06-25T18:08:36+0900 lvl=info msg=end pg=/api/tunnels id=5c7b20287413c9ea status=200 dur=0s
+2025-06-25 18:09:12,800 t=2025-06-25T18:09:12+0900 lvl=info msg=start pg=/api/tunnels id=57001cb5164834a5
+2025-06-25 18:09:12,800 t=2025-06-25T18:09:12+0900 lvl=info msg=end pg=/api/tunnels id=57001cb5164834a5 status=200 dur=0s
+2025-06-25 18:09:12,927 t=2025-06-25T18:09:12+0900 lvl=info msg=start pg=/api/tunnels id=336aadc94fd6f0f9
+2025-06-25 18:09:12,929 t=2025-06-25T18:09:12+0900 lvl=info msg=end pg=/api/tunnels id=336aadc94fd6f0f9 status=200 dur=0s
+2025-06-25 18:09:28,841 t=2025-06-25T18:09:28+0900 lvl=info msg="join connections" obj=join id=6d4ebfec0be9 l=127.0.0.1:8000 r=74.7.36.82:21065
+2025-06-25 18:09:36,295 t=2025-06-25T18:09:36+0900 lvl=info msg="join connections" obj=join id=40ec937d84c1 l=127.0.0.1:8000 r=74.7.36.92:54153
+2025-06-25 18:20:29,271 t=2025-06-25T18:20:29+0900 lvl=info msg="join connections" obj=join id=6cdeb84db475 l=127.0.0.1:8000 r=74.7.36.92:55708
+2025-06-25 18:25:22,696 t=2025-06-25T18:25:22+0900 lvl=info msg="join connections" obj=join id=2fda92c8aa9e l=127.0.0.1:8000 r=74.7.36.95:61998
+2025-06-25 18:25:43,809 t=2025-06-25T18:25:43+0900 lvl=info msg="join connections" obj=join id=6d8e557ffbd3 l=127.0.0.1:8000 r=74.7.36.80:46003
+2025-06-25 18:42:20,413 t=2025-06-25T18:42:20+0900 lvl=info msg="join connections" obj=join id=bfcbc62c908f l=127.0.0.1:8000 r=13.83.237.181:44675
+2025-06-25 18:42:30,536 t=2025-06-25T18:42:30+0900 lvl=info msg="join connections" obj=join id=2e0c69712a7d l=127.0.0.1:8000 r=13.83.237.183:58909
+2025-06-25 18:44:09,716 t=2025-06-25T18:44:09+0900 lvl=info msg="join connections" obj=join id=481bca13d276 l=127.0.0.1:8000 r=13.83.237.179:35814
+2025-06-25 18:44:15,936 t=2025-06-25T18:44:15+0900 lvl=info msg="join connections" obj=join id=35dbd630a92b l=127.0.0.1:8000 r=13.83.237.178:10443
+2025-06-25 18:46:40,011 t=2025-06-25T18:46:40+0900 lvl=info msg="join connections" obj=join id=f8e60f774d95 l=127.0.0.1:8000 r=13.83.237.188:48780
+2025-06-25 18:46:45,419 t=2025-06-25T18:46:45+0900 lvl=info msg="join connections" obj=join id=344d833e6a06 l=127.0.0.1:8000 r=13.83.237.185:23352
+2025-06-25 19:00:22,983 t=2025-06-25T19:00:22+0900 lvl=info msg="join connections" obj=join id=5172aa92debf l=127.0.0.1:8000 r=13.83.237.178:2288
+2025-06-25 19:27:21,941 t=2025-06-25T19:27:21+0900 lvl=info msg="join connections" obj=join id=9735a5295c65 l=127.0.0.1:8000 r=13.83.237.185:44457
+2025-06-25 19:44:12,069 t=2025-06-25T19:44:12+0900 lvl=info msg="join connections" obj=join id=3fc6cb452886 l=127.0.0.1:8000 r=74.7.36.102:57298
+2025-06-25 19:44:17,708 t=2025-06-25T19:44:17+0900 lvl=info msg="join connections" obj=join id=94bbb472fca3 l=127.0.0.1:8000 r=74.7.36.96:17932
+2025-06-25 19:45:51,645 t=2025-06-25T19:45:51+0900 lvl=info msg="join connections" obj=join id=61e24a1abfd3 l=127.0.0.1:8000 r=74.7.36.97:6565
+2025-06-25 19:49:08,723 t=2025-06-25T19:49:08+0900 lvl=info msg="join connections" obj=join id=f140379c6657 l=127.0.0.1:8000 r=74.7.36.100:29529
+2025-06-25 19:49:14,369 t=2025-06-25T19:49:14+0900 lvl=info msg="join connections" obj=join id=c6e751bf8f74 l=127.0.0.1:8000 r=74.7.36.101:29259
+2025-06-25 19:51:02,210 t=2025-06-25T19:51:02+0900 lvl=info msg="join connections" obj=join id=935f377ddd15 l=127.0.0.1:8000 r=74.7.36.96:17857
+2025-06-25 19:53:32,444 t=2025-06-25T19:53:32+0900 lvl=info msg="join connections" obj=join id=880d5525f7d7 l=127.0.0.1:8000 r=74.7.36.107:5842
+2025-06-25 19:54:40,201 t=2025-06-25T19:54:40+0900 lvl=info msg="join connections" obj=join id=2b5e200306e8 l=127.0.0.1:8000 r=74.7.36.103:35800
+2025-06-25 19:55:23,930 t=2025-06-25T19:55:23+0900 lvl=info msg="join connections" obj=join id=a48abe794962 l=127.0.0.1:8000 r=74.7.36.97:60759
+2025-06-25 19:56:11,696 t=2025-06-25T19:56:11+0900 lvl=info msg="join connections" obj=join id=8e52c3084d61 l=127.0.0.1:8000 r=74.7.36.107:64878
+2025-06-25 19:56:25,158 t=2025-06-25T19:56:25+0900 lvl=info msg="join connections" obj=join id=464442ffa6ef l=127.0.0.1:8000 r=74.7.36.108:54171
+2025-06-25 19:57:48,678 t=2025-06-25T19:57:48+0900 lvl=info msg="join connections" obj=join id=2de92eccff8e l=127.0.0.1:8000 r=74.7.36.110:59123
+2025-06-25 19:57:53,189 t=2025-06-25T19:57:53+0900 lvl=info msg="join connections" obj=join id=204fc3ead924 l=127.0.0.1:8000 r=74.7.36.97:33696
+2025-06-25 19:58:08,799 t=2025-06-25T19:58:08+0900 lvl=info msg="join connections" obj=join id=f8484908c664 l=127.0.0.1:8000 r=74.7.36.106:29638
+2025-06-25 19:58:18,286 t=2025-06-25T19:58:18+0900 lvl=info msg="join connections" obj=join id=19ca68efb840 l=127.0.0.1:8000 r=74.7.36.97:39883
+2025-06-25 19:59:06,597 t=2025-06-25T19:59:06+0900 lvl=info msg="join connections" obj=join id=d2331bcd2b13 l=127.0.0.1:8000 r=74.7.36.101:3633
+2025-06-25 19:59:56,578 t=2025-06-25T19:59:56+0900 lvl=info msg="join connections" obj=join id=f8d7c9c755c8 l=127.0.0.1:8000 r=74.7.36.96:39264
+2025-06-26 10:53:56,019 t=2025-06-26T10:53:56+0900 lvl=info msg="join connections" obj=join id=722afb172438 l=127.0.0.1:8000 r=57.154.187.43:17760
+2025-06-26 10:54:19,193 t=2025-06-26T10:54:19+0900 lvl=info msg="join connections" obj=join id=6f18d81c2d11 l=127.0.0.1:8000 r=57.154.187.47:4386
+2025-06-26 11:32:44,243 t=2025-06-26T11:32:44+0900 lvl=info msg="join connections" obj=join id=b3ec4b2386d2 l=127.0.0.1:8000 r=57.154.187.40:58279
+2025-06-26 11:33:11,654 t=2025-06-26T11:33:11+0900 lvl=info msg="join connections" obj=join id=41bcbfd74766 l=127.0.0.1:8000 r=57.154.187.43:33295
+2025-06-26 11:33:41,591 t=2025-06-26T11:33:41+0900 lvl=info msg="join connections" obj=join id=cd528d449ea8 l=127.0.0.1:8000 r=57.154.187.40:42597
+2025-06-26 11:34:30,220 t=2025-06-26T11:34:30+0900 lvl=info msg="join connections" obj=join id=737105560ea1 l=127.0.0.1:8000 r=57.154.187.37:37628
+2025-06-26 11:35:33,295 t=2025-06-26T11:35:33+0900 lvl=info msg="join connections" obj=join id=f9489e3c19dc l=127.0.0.1:8000 r=57.154.187.40:16267
+2025-06-26 11:39:15,249 t=2025-06-26T11:39:15+0900 lvl=info msg="join connections" obj=join id=6df54ad3ddbc l=127.0.0.1:8000 r=57.154.187.34:2154
+2025-06-26 14:07:11,606 t=2025-06-26T14:07:11+0900 lvl=info msg="join connections" obj=join id=07650a5ad6d4 l=127.0.0.1:8000 r=52.252.113.250:34552
+2025-06-26 14:08:11,540 t=2025-06-26T14:08:11+0900 lvl=info msg="join connections" obj=join id=32cbc4c31eef l=127.0.0.1:8000 r=52.252.113.252:26486
+2025-06-26 14:08:27,663 t=2025-06-26T14:08:27+0900 lvl=info msg="join connections" obj=join id=4d9d1e570eb7 l=127.0.0.1:8000 r=52.252.113.243:15284
+2025-06-26 14:08:39,705 t=2025-06-26T14:08:39+0900 lvl=info msg="join connections" obj=join id=518209f6a846 l=127.0.0.1:8000 r=52.252.113.242:50314
+2025-06-26 14:08:57,825 t=2025-06-26T14:08:57+0900 lvl=info msg="join connections" obj=join id=685d0d74c96d l=127.0.0.1:8000 r=52.252.113.246:55364
+2025-06-26 16:37:35,640 t=2025-06-26T16:37:35+0900 lvl=info msg="join connections" obj=join id=e3221da4e4ee l=127.0.0.1:8000 r=74.7.35.63:9328
+2025-06-26 16:37:40,298 t=2025-06-26T16:37:40+0900 lvl=info msg="join connections" obj=join id=05f91f39e8b7 l=127.0.0.1:8000 r=74.7.35.52:11813
+2025-06-26 16:44:33,043 t=2025-06-26T16:44:33+0900 lvl=info msg="join connections" obj=join id=16bbdff2383d l=127.0.0.1:8000 r=74.7.35.58:48997
+2025-06-26 16:45:46,522 t=2025-06-26T16:45:46+0900 lvl=info msg="join connections" obj=join id=7650cf0f2645 l=127.0.0.1:8000 r=74.7.35.51:64585
+2025-06-26 16:46:19,354 t=2025-06-26T16:46:19+0900 lvl=info msg="join connections" obj=join id=c91b91e7c502 l=127.0.0.1:8000 r=74.7.35.58:37906
+2025-06-26 16:46:39,188 t=2025-06-26T16:46:39+0900 lvl=info msg="join connections" obj=join id=d5ac48ab6e61 l=127.0.0.1:8000 r=74.7.35.57:63718
+2025-06-26 16:47:08,279 t=2025-06-26T16:47:08+0900 lvl=info msg="join connections" obj=join id=41827b4c0f38 l=127.0.0.1:8000 r=74.7.35.60:26537
+2025-06-26 16:47:26,549 t=2025-06-26T16:47:26+0900 lvl=info msg="join connections" obj=join id=2090a301b519 l=127.0.0.1:8000 r=74.7.35.63:52941
+2025-06-26 16:47:44,908 t=2025-06-26T16:47:44+0900 lvl=info msg="join connections" obj=join id=41f759c5b8d6 l=127.0.0.1:8000 r=74.7.35.58:3597
+2025-06-26 16:53:24,733 t=2025-06-26T16:53:24+0900 lvl=info msg="join connections" obj=join id=6e2491a2192c l=127.0.0.1:8000 r=68.220.57.72:32551
+2025-06-26 18:14:42,640 t=2025-06-26T18:14:42+0900 lvl=info msg="join connections" obj=join id=86cc7b44c720 l=127.0.0.1:8000 r=104.210.139.234:13882
+2025-06-26 18:15:11,855 t=2025-06-26T18:15:11+0900 lvl=info msg="join connections" obj=join id=8e9b368987e0 l=127.0.0.1:8000 r=104.210.139.225:51338
+2025-06-26 18:17:10,425 t=2025-06-26T18:17:10+0900 lvl=info msg="join connections" obj=join id=af627efd50f5 l=127.0.0.1:8000 r=104.210.139.225:21870
+2025-06-26 18:47:29,421 t=2025-06-26T18:47:29+0900 lvl=info msg="join connections" obj=join id=8d4dc7e72ad2 l=127.0.0.1:8000 r=104.210.139.235:11353
+2025-06-26 18:57:19,962 t=2025-06-26T18:57:19+0900 lvl=info msg="join connections" obj=join id=76c76ba7f051 l=127.0.0.1:8000 r=104.210.139.230:18586
+2025-06-26 19:01:10,758 t=2025-06-26T19:01:10+0900 lvl=info msg="join connections" obj=join id=5a3d7eaee698 l=127.0.0.1:8000 r=104.210.139.232:16847
+2025-06-27 09:30:39,783 t=2025-06-27T09:30:39+0900 lvl=info msg="update available" obj=updater
+2025-06-27 10:40:15,696 t=2025-06-27T10:40:15+0900 lvl=info msg="join connections" obj=join id=7a0aa24f2afd l=127.0.0.1:8000 r=57.154.174.119:28699
+2025-06-27 10:41:15,768 t=2025-06-27T10:41:15+0900 lvl=info msg="join connections" obj=join id=e6600a59be8b l=127.0.0.1:8000 r=57.154.174.115:65282
+2025-06-27 10:41:38,228 t=2025-06-27T10:41:38+0900 lvl=info msg="join connections" obj=join id=a85499aa122d l=127.0.0.1:8000 r=57.154.174.118:49576
+2025-06-27 10:42:38,103 t=2025-06-27T10:42:38+0900 lvl=info msg="join connections" obj=join id=5d7efe471cf1 l=127.0.0.1:8000 r=57.154.174.122:36836
+2025-06-27 10:48:14,819 t=2025-06-27T10:48:14+0900 lvl=info msg="join connections" obj=join id=b32a196cc598 l=127.0.0.1:8000 r=57.154.174.125:24892
+2025-06-27 10:49:12,517 t=2025-06-27T10:49:12+0900 lvl=info msg="join connections" obj=join id=c7f5c33c2b7d l=127.0.0.1:8000 r=57.154.174.122:34734
+2025-06-27 10:49:14,732 t=2025-06-27T10:49:14+0900 lvl=info msg="join connections" obj=join id=02a6f69a00de l=127.0.0.1:8000 r=57.154.174.117:8308
+2025-06-27 10:50:03,674 t=2025-06-27T10:50:03+0900 lvl=info msg="join connections" obj=join id=8f8e579f49db l=127.0.0.1:8000 r=57.154.174.120:39055
+2025-06-27 10:51:03,821 t=2025-06-27T10:51:03+0900 lvl=info msg="join connections" obj=join id=240da5ca3413 l=127.0.0.1:8000 r=57.154.174.124:57957
+2025-06-27 10:51:14,267 t=2025-06-27T10:51:14+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-27 10:51:14,268 t=2025-06-27T10:51:14+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-27 10:51:35,978 Opening tunnel named: http-8000-372325cc-76e0-42f0-9519-b38463df9119
+2025-06-27 10:51:36,517 t=2025-06-27T10:51:36+0900 lvl=info msg="no configuration paths supplied"
+2025-06-27 10:51:36,517 t=2025-06-27T10:51:36+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-27 10:51:36,518 t=2025-06-27T10:51:36+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-27 10:51:36,551 t=2025-06-27T10:51:36+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-27 10:51:36,856 t=2025-06-27T10:51:36+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-27 10:51:36,857 t=2025-06-27T10:51:36+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-27 10:51:36,864 t=2025-06-27T10:51:36+0900 lvl=info msg=start pg=/api/tunnels id=f80f8cd8c5b40202
+2025-06-27 10:51:36,864 t=2025-06-27T10:51:36+0900 lvl=info msg=end pg=/api/tunnels id=f80f8cd8c5b40202 status=200 dur=0s
+2025-06-27 10:51:36,866 t=2025-06-27T10:51:36+0900 lvl=info msg=start pg=/api/tunnels id=185a30dcea164b7a
+2025-06-27 10:51:36,866 t=2025-06-27T10:51:36+0900 lvl=info msg=end pg=/api/tunnels id=185a30dcea164b7a status=200 dur=0s
+2025-06-27 10:51:36,869 t=2025-06-27T10:51:36+0900 lvl=info msg=start pg=/api/tunnels id=5c627fd65f244fe4
+2025-06-27 10:51:36,869 t=2025-06-27T10:51:36+0900 lvl=info msg=end pg=/api/tunnels id=5c627fd65f244fe4 status=200 dur=0s
+2025-06-27 10:51:36,872 t=2025-06-27T10:51:36+0900 lvl=info msg=start pg=/api/tunnels id=0f5b7b4ec54211bf
+2025-06-27 10:51:36,931 t=2025-06-27T10:51:36+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-372325cc-76e0-42f0-9519-b38463df9119 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-27 10:51:36,931 t=2025-06-27T10:51:36+0900 lvl=info msg=end pg=/api/tunnels id=0f5b7b4ec54211bf status=201 dur=58.4546ms
+2025-06-27 10:51:36,932 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-27 10:51:36,933 Starting server. Press Ctrl+C to stop.
+2025-06-27 10:51:37,250 t=2025-06-27T10:51:37+0900 lvl=info msg="update available" obj=updater
+2025-06-27 10:51:37,446 t=2025-06-27T10:51:37+0900 lvl=info msg=start pg=/api/tunnels id=4a0bc49bf07d1dce
+2025-06-27 10:51:37,447 t=2025-06-27T10:51:37+0900 lvl=info msg=end pg=/api/tunnels id=4a0bc49bf07d1dce status=200 dur=0s
+2025-06-27 10:51:37,599 t=2025-06-27T10:51:37+0900 lvl=info msg=start pg=/api/tunnels id=3a203c634872862e
+2025-06-27 10:51:37,599 t=2025-06-27T10:51:37+0900 lvl=info msg=end pg=/api/tunnels id=3a203c634872862e status=200 dur=0s
+2025-06-27 10:51:49,560 t=2025-06-27T10:51:49+0900 lvl=info msg="join connections" obj=join id=ec4edee38066 l=127.0.0.1:8000 r=57.154.174.124:45773
+2025-06-27 10:51:49,585 127.0.0.1 POST /query HTTP/1.1 DATA=b'{"query": "-- 2025\\ub144 6\\uc6d4 \\uc8fc\\uac04, \\ubaa8\\ub4e0 \\ud50c\\ub7ab\\ud3fc\\ubcc4 \\ud65c\\uc131\\uc720\\uc800(WAU) \\ud2b8\\ub80c\\ub4dc(\\uc8fc \\ub2e8\\uc704 \\uc9d1\\uacc4)\\nSELECT \\n  DATEPART(week, REG_D'
+2025-06-27 10:51:54,105 t=2025-06-27T10:51:54+0900 lvl=info msg="join connections" obj=join id=eeaa5cdcd978 l=127.0.0.1:8000 r=57.154.174.125:7827
+2025-06-27 10:51:54,129 127.0.0.1 POST /query HTTP/1.1 DATA=b'{"query": "-- 2025\\ub144 6\\uc6d4 \\uac01 \\ud50c\\ub7ab\\ud3fc\\ubcc4 \\uc8fc\\uac04 \\ud65c\\uc131\\uc720\\uc800(WAU) \\ubcc0\\ud654 \\ucd94\\uc774 \\uc0c1\\uc138\\nSELECT \\n  DATEPART(week, REG_DATE) AS WEEK_NO,\\n  P'
+2025-06-27 10:51:55,079 t=2025-06-27T10:51:55+0900 lvl=info msg="join connections" obj=join id=53764c81147e l=127.0.0.1:8000 r=57.154.174.124:21413
+2025-06-27 10:51:55,105 127.0.0.1 POST /file HTTP/1.1 DATA=b'{"action": "read", "filename": "result.log"}'
+2025-06-27 10:52:38,682 t=2025-06-27T10:52:38+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-27 10:52:38,683 t=2025-06-27T10:52:38+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-27 10:53:13,878 Opening tunnel named: http-8000-2fc2446b-c5ca-4e8c-84ee-8c4951f9455d
+2025-06-27 10:53:14,274 t=2025-06-27T10:53:14+0900 lvl=info msg="no configuration paths supplied"
+2025-06-27 10:53:14,275 t=2025-06-27T10:53:14+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-27 10:53:14,275 t=2025-06-27T10:53:14+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-27 10:53:14,306 t=2025-06-27T10:53:14+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-27 10:53:14,625 t=2025-06-27T10:53:14+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-27 10:53:14,625 t=2025-06-27T10:53:14+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-27 10:53:14,630 t=2025-06-27T10:53:14+0900 lvl=info msg=start pg=/api/tunnels id=c3f3a9f677740637
+2025-06-27 10:53:14,631 t=2025-06-27T10:53:14+0900 lvl=info msg=end pg=/api/tunnels id=c3f3a9f677740637 status=200 dur=0s
+2025-06-27 10:53:14,633 t=2025-06-27T10:53:14+0900 lvl=info msg=start pg=/api/tunnels id=ecbd7a12c30cb1ec
+2025-06-27 10:53:14,633 t=2025-06-27T10:53:14+0900 lvl=info msg=end pg=/api/tunnels id=ecbd7a12c30cb1ec status=200 dur=0s
+2025-06-27 10:53:14,635 t=2025-06-27T10:53:14+0900 lvl=info msg=start pg=/api/tunnels id=50b5ede6e50684c1
+2025-06-27 10:53:14,636 t=2025-06-27T10:53:14+0900 lvl=info msg=end pg=/api/tunnels id=50b5ede6e50684c1 status=200 dur=0s
+2025-06-27 10:53:14,638 t=2025-06-27T10:53:14+0900 lvl=info msg=start pg=/api/tunnels id=6fe9106254c609fd
+2025-06-27 10:53:14,699 t=2025-06-27T10:53:14+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-2fc2446b-c5ca-4e8c-84ee-8c4951f9455d addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-27 10:53:14,700 t=2025-06-27T10:53:14+0900 lvl=info msg=end pg=/api/tunnels id=6fe9106254c609fd status=201 dur=60.5881ms
+2025-06-27 10:53:14,700 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-27 10:53:14,700 Starting server. Press Ctrl+C to stop.
+2025-06-27 10:53:15,021 t=2025-06-27T10:53:15+0900 lvl=info msg="update available" obj=updater
+2025-06-27 10:53:33,325 t=2025-06-27T10:53:33+0900 lvl=info msg="join connections" obj=join id=b6a00bfe5374 l=127.0.0.1:8000 r=57.154.174.126:22602
+2025-06-27 10:55:11,556 t=2025-06-27T10:55:11+0900 lvl=info msg="join connections" obj=join id=cf9797d6611e l=127.0.0.1:8000 r=57.154.174.124:54897
+2025-06-27 10:55:29,717 t=2025-06-27T10:55:29+0900 lvl=info msg="join connections" obj=join id=9f9dbe187ac0 l=127.0.0.1:8000 r=57.154.174.112:37708
+2025-06-27 11:02:26,787 t=2025-06-27T11:02:26+0900 lvl=info msg="join connections" obj=join id=4cc1138dab88 l=127.0.0.1:8000 r=57.154.174.115:30443
+2025-06-27 11:02:50,592 t=2025-06-27T11:02:50+0900 lvl=info msg="join connections" obj=join id=a9100a3d9e8f l=127.0.0.1:8000 r=57.154.174.122:26059
+2025-06-27 11:03:20,309 t=2025-06-27T11:03:20+0900 lvl=info msg="join connections" obj=join id=e302961b6c64 l=127.0.0.1:8000 r=57.154.174.121:23044
+2025-06-27 11:03:28,603 t=2025-06-27T11:03:28+0900 lvl=info msg="join connections" obj=join id=9ad47718da68 l=127.0.0.1:8000 r=57.154.174.121:7672
+2025-06-27 11:04:42,847 t=2025-06-27T11:04:42+0900 lvl=info msg="join connections" obj=join id=7c7d1b49e584 l=127.0.0.1:8000 r=57.154.174.125:56575
+2025-06-27 11:19:36,711 t=2025-06-27T11:19:36+0900 lvl=info msg=start pg=/api/tunnels id=aa30fe0e976c9a36
+2025-06-27 11:19:36,712 t=2025-06-27T11:19:36+0900 lvl=info msg=end pg=/api/tunnels id=aa30fe0e976c9a36 status=200 dur=0s
+2025-06-27 11:19:36,887 t=2025-06-27T11:19:36+0900 lvl=info msg=start pg=/api/tunnels id=987ffb4176f374f5
+2025-06-27 11:19:36,888 t=2025-06-27T11:19:36+0900 lvl=info msg=end pg=/api/tunnels id=987ffb4176f374f5 status=200 dur=0s
+2025-06-27 11:19:42,044 t=2025-06-27T11:19:42+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-27 11:19:42,044 t=2025-06-27T11:19:42+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-27 11:19:56,936 Opening tunnel named: http-8000-492a5b95-3d97-45b2-9b16-5dbc1d3dfd73
+2025-06-27 11:19:57,332 t=2025-06-27T11:19:57+0900 lvl=info msg="no configuration paths supplied"
+2025-06-27 11:19:57,333 t=2025-06-27T11:19:57+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-27 11:19:57,333 t=2025-06-27T11:19:57+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-27 11:19:57,365 t=2025-06-27T11:19:57+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-27 11:19:57,696 t=2025-06-27T11:19:57+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-27 11:19:57,696 t=2025-06-27T11:19:57+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-27 11:19:57,701 t=2025-06-27T11:19:57+0900 lvl=info msg=start pg=/api/tunnels id=bad36b5511085057
+2025-06-27 11:19:57,702 t=2025-06-27T11:19:57+0900 lvl=info msg=end pg=/api/tunnels id=bad36b5511085057 status=200 dur=0s
+2025-06-27 11:19:57,704 t=2025-06-27T11:19:57+0900 lvl=info msg=start pg=/api/tunnels id=4abca093b87c683c
+2025-06-27 11:19:57,705 t=2025-06-27T11:19:57+0900 lvl=info msg=end pg=/api/tunnels id=4abca093b87c683c status=200 dur=0s
+2025-06-27 11:19:57,707 t=2025-06-27T11:19:57+0900 lvl=info msg=start pg=/api/tunnels id=c7f3a8a63953dfd6
+2025-06-27 11:19:57,707 t=2025-06-27T11:19:57+0900 lvl=info msg=end pg=/api/tunnels id=c7f3a8a63953dfd6 status=200 dur=999.2쨉s
+2025-06-27 11:19:57,710 t=2025-06-27T11:19:57+0900 lvl=info msg=start pg=/api/tunnels id=714be90d6280591f
+2025-06-27 11:19:57,802 t=2025-06-27T11:19:57+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-492a5b95-3d97-45b2-9b16-5dbc1d3dfd73 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-27 11:19:57,803 t=2025-06-27T11:19:57+0900 lvl=info msg=end pg=/api/tunnels id=714be90d6280591f status=201 dur=91.5399ms
+2025-06-27 11:19:57,803 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-27 11:19:57,803 Starting server. Press Ctrl+C to stop.
+2025-06-27 11:19:58,111 t=2025-06-27T11:19:58+0900 lvl=info msg="update available" obj=updater
+2025-06-27 11:22:22,958 t=2025-06-27T11:22:22+0900 lvl=info msg="join connections" obj=join id=27634dcbf31c l=127.0.0.1:8000 r=57.154.174.120:17320
+2025-06-27 11:30:18,368 t=2025-06-27T11:30:18+0900 lvl=info msg="join connections" obj=join id=d6292cbb44c0 l=127.0.0.1:8000 r=13.83.237.177:11379
+2025-06-27 11:34:02,861 t=2025-06-27T11:34:02+0900 lvl=info msg="join connections" obj=join id=4548f59c6891 l=127.0.0.1:8000 r=13.83.237.185:54852
+2025-06-27 11:34:06,258 t=2025-06-27T11:34:06+0900 lvl=info msg="join connections" obj=join id=716e5c52ab9b l=127.0.0.1:8000 r=13.83.237.182:35973
+2025-06-27 11:35:19,516 t=2025-06-27T11:35:19+0900 lvl=info msg="join connections" obj=join id=71b7d6bd5ab4 l=127.0.0.1:8000 r=13.83.237.183:44802
+2025-06-27 11:37:11,112 t=2025-06-27T11:37:11+0900 lvl=info msg="join connections" obj=join id=0cc8cd83a652 l=127.0.0.1:8000 r=13.83.237.178:48739
+2025-06-27 11:39:19,972 t=2025-06-27T11:39:19+0900 lvl=info msg="join connections" obj=join id=4f24b9decbee l=127.0.0.1:8000 r=13.83.237.178:50304
+2025-06-27 11:40:11,307 t=2025-06-27T11:40:11+0900 lvl=info msg="join connections" obj=join id=88e3cb4f3f8c l=127.0.0.1:8000 r=13.83.237.184:56137
+2025-06-27 11:57:00,494 t=2025-06-27T11:57:00+0900 lvl=info msg="join connections" obj=join id=9bd610d8558b l=127.0.0.1:8000 r=13.83.237.177:7141
+2025-06-27 11:57:20,739 t=2025-06-27T11:57:20+0900 lvl=info msg="join connections" obj=join id=101305d7e199 l=127.0.0.1:8000 r=13.83.237.191:49827
+2025-06-27 11:58:32,617 t=2025-06-27T11:58:32+0900 lvl=info msg="join connections" obj=join id=1fcbe3be1aba l=127.0.0.1:8000 r=13.83.237.177:19991
+2025-06-27 11:59:08,737 t=2025-06-27T11:59:08+0900 lvl=info msg="join connections" obj=join id=d7f04f134901 l=127.0.0.1:8000 r=13.83.237.191:1166
+2025-06-27 12:01:25,167 t=2025-06-27T12:01:25+0900 lvl=info msg="join connections" obj=join id=3da75005aa6e l=127.0.0.1:8000 r=13.83.237.184:58889
+2025-06-27 12:02:02,922 t=2025-06-27T12:02:02+0900 lvl=info msg="join connections" obj=join id=5782b5168ecd l=127.0.0.1:8000 r=13.83.237.183:1071
+2025-06-27 12:02:26,722 t=2025-06-27T12:02:26+0900 lvl=info msg="join connections" obj=join id=acdf53757d47 l=127.0.0.1:8000 r=13.83.237.179:19171
+2025-06-27 12:06:25,510 t=2025-06-27T12:06:25+0900 lvl=info msg="join connections" obj=join id=2639d0c59dfc l=127.0.0.1:8000 r=13.83.237.181:34027
+2025-06-27 13:16:58,911 t=2025-06-27T13:16:58+0900 lvl=info msg="join connections" obj=join id=bac4ee73fdcd l=127.0.0.1:8000 r=74.7.36.95:36385
+2025-06-27 13:18:03,652 t=2025-06-27T13:18:03+0900 lvl=info msg="join connections" obj=join id=cb410fa184f5 l=127.0.0.1:8000 r=74.7.36.81:53555
+2025-06-27 14:06:33,980 Opening tunnel named: http-8000-51309517-5baa-4d3c-9bd2-4455987fdded
+2025-06-27 14:06:36,553 t=2025-06-27T14:06:36+0900 lvl=info msg="no configuration paths supplied"
+2025-06-27 14:06:36,553 t=2025-06-27T14:06:36+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-27 14:06:36,554 t=2025-06-27T14:06:36+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-27 14:06:36,585 t=2025-06-27T14:06:36+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-27 14:06:36,783 t=2025-06-27T14:06:36+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-27 14:06:36,784 t=2025-06-27T14:06:36+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-27 14:06:36,787 t=2025-06-27T14:06:36+0900 lvl=info msg=start pg=/api/tunnels id=afde1c5a345718f6
+2025-06-27 14:06:36,788 t=2025-06-27T14:06:36+0900 lvl=info msg=end pg=/api/tunnels id=afde1c5a345718f6 status=200 dur=0s
+2025-06-27 14:06:36,790 t=2025-06-27T14:06:36+0900 lvl=info msg=start pg=/api/tunnels id=e95ba6b29f408cb0
+2025-06-27 14:06:36,791 t=2025-06-27T14:06:36+0900 lvl=info msg=end pg=/api/tunnels id=e95ba6b29f408cb0 status=200 dur=0s
+2025-06-27 14:06:36,792 t=2025-06-27T14:06:36+0900 lvl=info msg=start pg=/api/tunnels id=3a8c8d5e22557423
+2025-06-27 14:06:36,793 t=2025-06-27T14:06:36+0900 lvl=info msg=end pg=/api/tunnels id=3a8c8d5e22557423 status=200 dur=0s
+2025-06-27 14:06:36,795 t=2025-06-27T14:06:36+0900 lvl=info msg=start pg=/api/tunnels id=9b048be1769f9a91
+2025-06-27 14:06:36,853 t=2025-06-27T14:06:36+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-51309517-5baa-4d3c-9bd2-4455987fdded addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-27 14:06:36,854 t=2025-06-27T14:06:36+0900 lvl=info msg=end pg=/api/tunnels id=9b048be1769f9a91 status=201 dur=57.5987ms
+2025-06-27 14:06:36,854 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-27 14:06:36,854 Starting server. Press Ctrl+C to stop.
+2025-06-27 14:06:37,522 t=2025-06-27T14:06:37+0900 lvl=info msg="update available" obj=updater
+2025-06-27 14:41:06,902 t=2025-06-27T14:41:06+0900 lvl=info msg="join connections" obj=join id=f112f536079e l=127.0.0.1:8000 r=74.7.36.101:47425
+2025-06-27 14:41:13,221 t=2025-06-27T14:41:13+0900 lvl=info msg="join connections" obj=join id=0aad5098a2da l=127.0.0.1:8000 r=74.7.36.104:15990
+2025-06-27 14:41:39,286 t=2025-06-27T14:41:39+0900 lvl=info msg="join connections" obj=join id=018c4c42e593 l=127.0.0.1:8000 r=74.7.36.98:16365
+2025-06-27 14:41:51,346 t=2025-06-27T14:41:51+0900 lvl=info msg="join connections" obj=join id=5f7325a3ca3f l=127.0.0.1:8000 r=74.7.36.105:12032
+2025-06-27 14:42:10,835 t=2025-06-27T14:42:10+0900 lvl=info msg="join connections" obj=join id=1f4b59087583 l=127.0.0.1:8000 r=74.7.36.98:22529
+2025-06-27 14:42:39,685 t=2025-06-27T14:42:39+0900 lvl=info msg="join connections" obj=join id=a37523a35c0c l=127.0.0.1:8000 r=74.7.36.107:19289
+2025-06-27 20:06:38,497 t=2025-06-27T20:06:38+0900 lvl=info msg="update available" obj=updater
+2025-06-28 02:06:39,264 t=2025-06-28T02:06:39+0900 lvl=info msg="update available" obj=updater
+2025-06-28 08:06:39,930 t=2025-06-28T08:06:39+0900 lvl=info msg="update available" obj=updater
+2025-06-30 11:21:56,842 Opening tunnel named: http-8000-af69223c-df16-4f47-a489-ecb6594ae425
+2025-06-30 11:22:01,008 t=2025-06-30T11:22:00+0900 lvl=info msg="no configuration paths supplied"
+2025-06-30 11:22:01,009 t=2025-06-30T11:22:01+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-30 11:22:01,009 t=2025-06-30T11:22:01+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-30 11:22:01,038 t=2025-06-30T11:22:01+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-30 11:22:01,543 t=2025-06-30T11:22:01+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-30 11:22:01,543 t=2025-06-30T11:22:01+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-30 11:22:01,549 t=2025-06-30T11:22:01+0900 lvl=info msg=start pg=/api/tunnels id=be1391a2697f028a
+2025-06-30 11:22:01,550 t=2025-06-30T11:22:01+0900 lvl=info msg=end pg=/api/tunnels id=be1391a2697f028a status=200 dur=1.2375ms
+2025-06-30 11:22:01,552 t=2025-06-30T11:22:01+0900 lvl=info msg=start pg=/api/tunnels id=95bbbd190643be28
+2025-06-30 11:22:01,552 t=2025-06-30T11:22:01+0900 lvl=info msg=end pg=/api/tunnels id=95bbbd190643be28 status=200 dur=0s
+2025-06-30 11:22:01,555 t=2025-06-30T11:22:01+0900 lvl=info msg=start pg=/api/tunnels id=926cf3992488faf3
+2025-06-30 11:22:01,555 t=2025-06-30T11:22:01+0900 lvl=info msg=end pg=/api/tunnels id=926cf3992488faf3 status=200 dur=0s
+2025-06-30 11:22:01,557 t=2025-06-30T11:22:01+0900 lvl=info msg=start pg=/api/tunnels id=61600cb8436cdb3f
+2025-06-30 11:22:01,619 t=2025-06-30T11:22:01+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-af69223c-df16-4f47-a489-ecb6594ae425 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-30 11:22:01,619 t=2025-06-30T11:22:01+0900 lvl=info msg=end pg=/api/tunnels id=61600cb8436cdb3f status=201 dur=61.9187ms
+2025-06-30 11:22:01,619 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-30 11:22:01,619 Starting server. Press Ctrl+C to stop.
+2025-06-30 11:22:14,873 t=2025-06-30T11:22:14+0900 lvl=info msg="join connections" obj=join id=c4a0cd14f603 l=127.0.0.1:8000 r=52.255.111.20:59529
+2025-06-30 11:31:50,444 t=2025-06-30T11:31:50+0900 lvl=info msg="join connections" obj=join id=439d3183326c l=127.0.0.1:8000 r=52.255.111.19:24962
+2025-06-30 13:24:15,240 t=2025-06-30T13:24:15+0900 lvl=info msg=start pg=/api/tunnels id=b83dcbea2d5b99a9
+2025-06-30 13:24:15,242 t=2025-06-30T13:24:15+0900 lvl=info msg=end pg=/api/tunnels id=b83dcbea2d5b99a9 status=200 dur=0s
+2025-06-30 13:27:23,663 t=2025-06-30T13:27:23+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-30 13:27:23,664 t=2025-06-30T13:27:23+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-30 13:27:38,907 Opening tunnel named: http-8000-78f18149-036e-4f41-86a8-37ae5182490e
+2025-06-30 13:27:41,281 t=2025-06-30T13:27:41+0900 lvl=info msg="no configuration paths supplied"
+2025-06-30 13:27:41,282 t=2025-06-30T13:27:41+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-30 13:27:41,282 t=2025-06-30T13:27:41+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-30 13:27:41,310 t=2025-06-30T13:27:41+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-30 13:27:42,004 t=2025-06-30T13:27:42+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-30 13:27:42,004 t=2025-06-30T13:27:42+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-30 13:27:42,010 t=2025-06-30T13:27:42+0900 lvl=info msg=start pg=/api/tunnels id=ef54b2eb67ca71e3
+2025-06-30 13:27:42,011 t=2025-06-30T13:27:42+0900 lvl=info msg=end pg=/api/tunnels id=ef54b2eb67ca71e3 status=200 dur=0s
+2025-06-30 13:27:42,013 t=2025-06-30T13:27:42+0900 lvl=info msg=start pg=/api/tunnels id=3a40c625f9167c3a
+2025-06-30 13:27:42,013 t=2025-06-30T13:27:42+0900 lvl=info msg=end pg=/api/tunnels id=3a40c625f9167c3a status=200 dur=0s
+2025-06-30 13:27:42,016 t=2025-06-30T13:27:42+0900 lvl=info msg=start pg=/api/tunnels id=77478ac89eb6d56c
+2025-06-30 13:27:42,016 t=2025-06-30T13:27:42+0900 lvl=info msg=end pg=/api/tunnels id=77478ac89eb6d56c status=200 dur=0s
+2025-06-30 13:27:42,032 t=2025-06-30T13:27:42+0900 lvl=info msg=start pg=/api/tunnels id=9bc2b50a37c4f0b1
+2025-06-30 13:27:42,108 t=2025-06-30T13:27:42+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-78f18149-036e-4f41-86a8-37ae5182490e addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-30 13:27:42,109 t=2025-06-30T13:27:42+0900 lvl=info msg=end pg=/api/tunnels id=9bc2b50a37c4f0b1 status=201 dur=75.9645ms
+2025-06-30 13:27:42,109 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-30 13:27:42,109 Starting server. Press Ctrl+C to stop.
+2025-06-30 13:29:58,086 t=2025-06-30T13:29:58+0900 lvl=info msg="join connections" obj=join id=f1f01e4e6e2c l=127.0.0.1:8000 r=52.255.111.29:58186
+2025-06-30 13:53:36,859 t=2025-06-30T13:53:36+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2025-06-30 13:53:36,859 t=2025-06-30T13:53:36+0900 lvl=info msg="session closing" obj=tunnels.session err=nil
+2025-06-30 13:54:39,560 Opening tunnel named: http-8000-15dfa226-afa1-45df-b472-ad880a6c4766
+2025-06-30 13:54:41,758 t=2025-06-30T13:54:41+0900 lvl=info msg="no configuration paths supplied"
+2025-06-30 13:54:41,758 t=2025-06-30T13:54:41+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\bohyun43\\AppData\\Local/ngrok/ngrok.yml
+2025-06-30 13:54:41,759 t=2025-06-30T13:54:41+0900 lvl=info msg="open config file" path=C:\\Users\\bohyun43\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+2025-06-30 13:54:41,785 t=2025-06-30T13:54:41+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+2025-06-30 13:54:42,459 t=2025-06-30T13:54:42+0900 lvl=info msg="client session established" obj=tunnels.session
+2025-06-30 13:54:42,460 t=2025-06-30T13:54:42+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+2025-06-30 13:54:42,466 t=2025-06-30T13:54:42+0900 lvl=info msg=start pg=/api/tunnels id=691d55520031e4ff
+2025-06-30 13:54:42,466 t=2025-06-30T13:54:42+0900 lvl=info msg=end pg=/api/tunnels id=691d55520031e4ff status=200 dur=0s
+2025-06-30 13:54:42,468 t=2025-06-30T13:54:42+0900 lvl=info msg=start pg=/api/tunnels id=73d01042a6d2775c
+2025-06-30 13:54:42,469 t=2025-06-30T13:54:42+0900 lvl=info msg=end pg=/api/tunnels id=73d01042a6d2775c status=200 dur=0s
+2025-06-30 13:54:42,472 t=2025-06-30T13:54:42+0900 lvl=info msg=start pg=/api/tunnels id=4fcf1f6bd7efe026
+2025-06-30 13:54:42,472 t=2025-06-30T13:54:42+0900 lvl=info msg=end pg=/api/tunnels id=4fcf1f6bd7efe026 status=200 dur=0s
+2025-06-30 13:54:42,475 t=2025-06-30T13:54:42+0900 lvl=info msg=start pg=/api/tunnels id=b0473706ba3358e7
+2025-06-30 13:54:42,525 t=2025-06-30T13:54:42+0900 lvl=info msg="started tunnel" obj=tunnels name=http-8000-15dfa226-afa1-45df-b472-ad880a6c4766 addr=http://localhost:8000 url=https://3on3.ngrok.app
+2025-06-30 13:54:42,526 t=2025-06-30T13:54:42+0900 lvl=info msg=end pg=/api/tunnels id=b0473706ba3358e7 status=201 dur=50.0596ms
+2025-06-30 13:54:42,526 ngrok tunnel: NgrokTunnel: "https://3on3.ngrok.app" -> "http://localhost:8000"
+2025-06-30 13:54:42,527 Starting server. Press Ctrl+C to stop.
+2025-06-30 13:54:49,445 t=2025-06-30T13:54:49+0900 lvl=info msg=start pg=/api/tunnels id=b88e89bbfd1979dc
+2025-06-30 13:54:49,446 t=2025-06-30T13:54:49+0900 lvl=info msg=end pg=/api/tunnels id=b88e89bbfd1979dc status=200 dur=259.4쨉s
+2025-06-30 13:54:50,633 t=2025-06-30T13:54:50+0900 lvl=info msg=start pg=/api/tunnels id=6a2de280e6bf8734
+2025-06-30 13:54:50,633 t=2025-06-30T13:54:50+0900 lvl=info msg=end pg=/api/tunnels id=6a2de280e6bf8734 status=200 dur=0s
+2025-06-30 13:54:50,765 t=2025-06-30T13:54:50+0900 lvl=info msg=start pg=/api/tunnels id=bf9464822afe2577
+2025-06-30 13:54:50,765 t=2025-06-30T13:54:50+0900 lvl=info msg=end pg=/api/tunnels id=bf9464822afe2577 status=200 dur=0s
+2025-06-30 14:25:52,378 t=2025-06-30T14:25:52+0900 lvl=info msg=start pg=/api/tunnels id=383054c8510ad6d3
+2025-06-30 14:25:52,378 t=2025-06-30T14:25:52+0900 lvl=info msg=end pg=/api/tunnels id=383054c8510ad6d3 status=200 dur=1.001ms
+2025-06-30 14:25:52,505 t=2025-06-30T14:25:52+0900 lvl=info msg=start pg=/api/tunnels id=71b339919b0b83a8
+2025-06-30 14:25:52,506 t=2025-06-30T14:25:52+0900 lvl=info msg=end pg=/api/tunnels id=71b339919b0b83a8 status=200 dur=0s
+2025-06-30 14:25:54,549 t=2025-06-30T14:25:54+0900 lvl=info msg=start pg=/api/tunnels id=1b9b90fdbf4683a9
+2025-06-30 14:25:54,550 t=2025-06-30T14:25:54+0900 lvl=info msg=end pg=/api/tunnels id=1b9b90fdbf4683a9 status=200 dur=0s
+2025-06-30 14:25:54,666 t=2025-06-30T14:25:54+0900 lvl=info msg=start pg=/api/tunnels id=799874593fa4988b
+2025-06-30 14:25:54,666 t=2025-06-30T14:25:54+0900 lvl=info msg=end pg=/api/tunnels id=799874593fa4988b status=200 dur=0s
+2025-06-30 14:26:09,027 t=2025-06-30T14:26:09+0900 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
