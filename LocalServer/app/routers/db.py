@@ -4,8 +4,6 @@ from pydantic import BaseModel
 from typing import List
 from app.utils import get_db_connection
 import logging
-import os
-import csv
 
 # 로깅 설정
 logger = logging.getLogger("db")
@@ -19,9 +17,6 @@ router = APIRouter(tags=["db"])
 
 class QueryReq(BaseModel):
     query: str
-
-class QueryFileReq(QueryReq):
-    filename: str
 
 @router.get("/db/version", summary="DB 버전")
 def db_version():
@@ -128,37 +123,6 @@ def run_query(req: QueryReq):
             rows = []
             logger.debug("📭 결과 없음 (DML 등)")
         return {"rows": rows}
-    except Exception as e:
-        logger.error(f"❌ 쿼리 실행 실패: {e}")
-        raise HTTPException(500, detail=f"쿼리 오류: {str(e)}")
-    finally:
-        conn.close()
-
-@router.post("/query-to-file", summary="SQL 쿼리 실행 후 파일 저장")
-def run_query_to_file(req: QueryFileReq):
-    logger.info("📡 SQL 쿼리 실행 및 파일 저장 요청")
-    logger.debug(f"📝 쿼리 내용: {req.query}")
-    try:
-        conn = get_db_connection("STEAM_GAME")
-        logger.debug("✅ DB 연결 성공")
-        cur = conn.cursor()
-        cur.execute(req.query)
-        os.makedirs("output", exist_ok=True)
-        fp = os.path.join("output", req.filename)
-        if cur.description:
-            cols = [c[0] for c in cur.description]
-            rows = cur.fetchall()
-            with open(fp, "w", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f)
-                writer.writerow(cols)
-                writer.writerows(rows)
-            logger.debug(f"📁 결과 저장 완료: {fp}")
-            return {"result": "saved", "file": fp, "rows": len(rows)}
-        else:
-            with open(fp, "w", encoding="utf-8") as f:
-                f.write("데이터 없음")
-            logger.debug(f"📭 결과 없음, 파일 기록: {fp}")
-            return {"result": "no_data", "file": fp}
     except Exception as e:
         logger.error(f"❌ 쿼리 실행 실패: {e}")
         raise HTTPException(500, detail=f"쿼리 오류: {str(e)}")
