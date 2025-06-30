@@ -39,14 +39,31 @@ def get_ngrok_url(
     return fallback
 
 def get_db_connection(
-    database: str = "master", *, retries: int = 3, delay: float = 1.0
+    database: str | None = None, *, retries: int = 3, delay: float = 1.0
 ):
-    """Connect to SQL Server with simple retry logic."""
+    """Connect to SQL Server with simple retry logic.
+
+    Connection parameters can be customised using the following environment
+    variables with the shown defaults:
+
+    - ``MSSQL_SERVER`` (``10.31.20.6``)
+    - ``MSSQL_USER`` (``sa``)
+    - ``MSSQL_PASSWORD`` (``f$ei#L!sa``)
+    - ``MSSQL_DATABASE`` (``master`` when ``database`` argument is ``None``)
+    """
+
+    server = os.environ.get("MSSQL_SERVER", "10.31.20.6")
+    user = os.environ.get("MSSQL_USER", "sa")
+    password = os.environ.get("MSSQL_PASSWORD", "f$ei#L!sa")
+    default_db = os.environ.get("MSSQL_DATABASE", "master")
+    if database is None:
+        database = default_db
+
     conn_str = (
         "DRIVER={ODBC Driver 17 for SQL Server};"
-        "SERVER=10.31.20.6;"
+        f"SERVER={server};"
         f"DATABASE={database};"
-        "UID=sa;PWD=f$ei#L!sa"
+        f"UID={user};PWD={password}"
     )
     last_error = None
     for attempt in range(1, retries + 1):

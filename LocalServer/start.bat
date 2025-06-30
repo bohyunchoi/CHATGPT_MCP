@@ -7,6 +7,12 @@ set ROOT_DIR=%~dp0
 REM === 2. (필요시) 가상환경 활성화 ===
 REM call "%ROOT_DIR%\.venv\Scripts\activate"
 
+REM === DB 접속 정보 설정 ===
+IF NOT DEFINED MSSQL_SERVER set "MSSQL_SERVER=10.31.20.6"
+IF NOT DEFINED MSSQL_USER set "MSSQL_USER=sa"
+IF NOT DEFINED MSSQL_PASSWORD set "MSSQL_PASSWORD=f$ei#L!sa"
+IF NOT DEFINED MSSQL_DATABASE set "MSSQL_DATABASE=master"
+
 REM === 3. 프로젝트 루트로 이동 ===
 cd /d "%ROOT_DIR%"
 
