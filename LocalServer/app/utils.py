@@ -3,6 +3,15 @@ import os
 import requests
 import pyodbc
 import time
+import logging
+
+# ─── 로거 설정 ────────────────────────────────────────────────────────────────
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] [utils] %(message)s",
+    datefmt="%H:%M:%S",
+)
+logger = logging.getLogger("utils")
 
 def get_ngrok_url(
     retries: int = 5,
@@ -18,7 +27,7 @@ def get_ngrok_url(
 
     env_url = os.environ.get("NGROK_URL")
     if env_url:
-        print(f"🔌 Using NGROK_URL from environment: {env_url}")
+        logger.info(f"🔌 Using NGROK_URL from environment: {env_url}")
         return env_url
 
     for attempt in range(1, retries + 1):
@@ -28,14 +37,18 @@ def get_ngrok_url(
                 url = tunnel.get("public_url", "")
                 if url.startswith("https://"):
                     if attempt > 1:
-                        print(f"🔌 Found ngrok URL after {attempt} attempts: {url}")
+                        logger.info(
+                            f"🔌 Found ngrok URL after {attempt} attempts: {url}"
+                        )
                     return url
         except Exception as e:
-            print(f"⚠️ Failed to fetch ngrok URL ({attempt}/{retries}): {e}")
+            logger.warning(
+                f"⚠️ Failed to fetch ngrok URL ({attempt}/{retries}): {e}"
+            )
         time.sleep(delay)
 
     fallback = "http://localhost:8000"
-    print(f"⚠️ Using fallback URL: {fallback}")
+    logger.warning(f"⚠️ Using fallback URL: {fallback}")
     return fallback
 
 def get_db_connection(
