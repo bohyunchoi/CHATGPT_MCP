@@ -4,6 +4,7 @@ import requests
 import pyodbc
 import time
 import logging
+from typing import Optional
 
 # ─── 로거 설정 ────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -52,7 +53,7 @@ def get_ngrok_url(
     return fallback
 
 def get_db_connection(
-    database: str | None = None, *, retries: int = 3, delay: float = 1.0
+    database: Optional[str] = None, *, retries: int = 3, delay: float = 1.0
 ):
     """Connect to SQL Server with simple retry logic.
 
