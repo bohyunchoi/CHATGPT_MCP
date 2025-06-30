@@ -38,10 +38,14 @@ def get_ngrok_url(
     print(f"⚠️ Using fallback URL: {fallback}")
     return fallback
 
+from typing import Optional
+
 def get_db_connection(
-    database: str = "master", *, retries: int = 3, delay: float = 1.0
+    database: Optional[str] = None, *, retries: int = 3, delay: float = 1.0
 ):
     """Connect to SQL Server with simple retry logic."""
+    if database is None:
+        database = "master"
     conn_str = (
         "DRIVER={ODBC Driver 17 for SQL Server};"
         "SERVER=10.31.20.6;"
