@@ -4,6 +4,12 @@ setlocal enabledelayedexpansion
 set ROOT_DIR=%~dp0
 cd /d "%ROOT_DIR%"
 
+:: DB connection settings
+IF NOT DEFINED MSSQL_SERVER set "MSSQL_SERVER=10.31.20.6"
+IF NOT DEFINED MSSQL_USER set "MSSQL_USER=sa"
+IF NOT DEFINED MSSQL_PASSWORD set "MSSQL_PASSWORD=f$ei#L!sa"
+IF NOT DEFINED MSSQL_DATABASE set "MSSQL_DATABASE=master"
+
 :: Start ngrok first so that the FastAPI server advertises the public URL
 echo [INFO] Starting ngrok...
 start "ngrok" "%ROOT_DIR%ngrok.exe" http 8000 > "%ROOT_DIR%ngrok.log" 2>&1
