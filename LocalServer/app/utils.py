@@ -1,28 +1,42 @@
 # app/utils.py
+import os
 import requests
 import pyodbc
 import time
 
-def get_ngrok_url(retries: int = 5, delay: float = 1.0) -> str:
+def get_ngrok_url(
+    retries: int = 5,
+    delay: float = 1.0,
+    api_url: str = "http://127.0.0.1:4040/api/tunnels",
+) -> str:
     """Return the HTTPS ngrok tunnel URL.
 
-    The local ngrok API may not be immediately ready when this function is
-    called.  A simple retry mechanism is used to wait for the tunnel
-    information.  If no tunnel is found after the retries, ``localhost`` is
-    returned instead.
+    An environment variable ``NGROK_URL`` can be set to bypass querying the
+    local ngrok API. If the API is not reachable, a simple retry mechanism is
+    used.  When no tunnel is found, ``http://localhost:8000`` is returned.
     """
-    api_url = "http://127.0.0.1:4040/api/tunnels"
-    for _ in range(retries):
+
+    env_url = os.environ.get("NGROK_URL")
+    if env_url:
+        print(f"🔌 Using NGROK_URL from environment: {env_url}")
+        return env_url
+
+    for attempt in range(1, retries + 1):
         try:
             resp = requests.get(api_url, timeout=2).json()
             for tunnel in resp.get("tunnels", []):
                 url = tunnel.get("public_url", "")
                 if url.startswith("https://"):
+                    if attempt > 1:
+                        print(f"🔌 Found ngrok URL after {attempt} attempts: {url}")
                     return url
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"⚠️ Failed to fetch ngrok URL ({attempt}/{retries}): {e}")
         time.sleep(delay)
-    return "http://localhost:8000"
+
+    fallback = "http://localhost:8000"
+    print(f"⚠️ Using fallback URL: {fallback}")
+    return fallback
 
 def get_db_connection(
     database: str = "master", *, retries: int = 3, delay: float = 1.0
