@@ -3,20 +3,25 @@ import requests
 import pyodbc
 import time
 
-def get_ngrok_url() -> str:
+def get_ngrok_url(retries: int = 5, delay: float = 1.0) -> str:
+    """Return the HTTPS ngrok tunnel URL.
+
+    The local ngrok API may not be immediately ready when this function is
+    called.  A simple retry mechanism is used to wait for the tunnel
+    information.  If no tunnel is found after the retries, ``localhost`` is
+    returned instead.
     """
-    로컬 ngrok 관리 API에서 HTTPS 터널 URL을 가져옵니다.
-    실패 시 localhost로 대체.
-    """
-    try:
-        api_url = "http://127.0.0.1:4040/api/tunnels"
-        resp = requests.get(api_url, timeout=2).json()
-        for tunnel in resp.get("tunnels", []):
-            url = tunnel.get("public_url", "")
-            if url.startswith("https://"):
-                return url
-    except Exception:
-        pass
+    api_url = "http://127.0.0.1:4040/api/tunnels"
+    for _ in range(retries):
+        try:
+            resp = requests.get(api_url, timeout=2).json()
+            for tunnel in resp.get("tunnels", []):
+                url = tunnel.get("public_url", "")
+                if url.startswith("https://"):
+                    return url
+        except Exception:
+            pass
+        time.sleep(delay)
     return "http://localhost:8000"
 
 def get_db_connection(
