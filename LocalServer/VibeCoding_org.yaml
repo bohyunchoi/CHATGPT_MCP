@@ -1,0 +1,1142 @@
+openapi: 3.1.0
+info:
+  title: MCP File Tool
+  version: 1.0.0
+servers:
+  - url: https://3on3.ngrok.app
+paths:
+  /file:
+    post:
+      summary: 파일을 읽거나 쓰거나 수정하고 실행합니다
+      operationId: file_read_write_file_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+                - filename
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - read
+                    - write
+                    - modify
+                filename:
+                  type: string
+                content:
+                  type: string
+                find:
+                  type: string
+                replace:
+                  type: string
+      responses:
+        "200":
+          description: 작업 결과 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  stdout:
+                    type: string
+                  stderr:
+                    type: string
+                  execution_time_sec:
+                    type: number
+  /run-bat:
+    post:
+      summary: 로컬 bat 파일 실행
+      operationId: run_bat_file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filename
+              properties:
+                filename:
+                  type: string
+      responses:
+        "200":
+          description: 실행 결과 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  stdout:
+                    type: string
+                  stderr:
+                    type: string
+                  return_code:
+                    type: integer
+                  duration_sec:
+                    type: number
+        "404":
+          description: 요청된 bat 파일을 찾을 수 없음
+        "500":
+          description: 서버 내부 오류
+  /list-files:
+    get:
+      summary: 지정된 폴더 내 파일 목록 반환
+      operationId: list_files
+      parameters:
+        - name: folder
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 파일 목록 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: 폴더가 존재하지 않음
+  /list-folders:
+    get:
+      summary: 지정된 폴더 내 서브폴더 목록 반환
+      operationId: list_folders
+      parameters:
+        - name: folder
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 서브폴더 목록 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: 폴더가 존재하지 않음
+  /list-python-files:
+    get:
+      summary: 지정된 폴더 내 Python(.py) 파일 목록 반환
+      operationId: list_python_files
+      parameters:
+        - name: folder
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Python 파일 목록 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: 폴더가 존재하지 않음
+  /read-all-python-files:
+    get:
+      summary: 지정된 폴더 내 모든 Python 파일 내용 반환
+      operationId: read_all_python_files
+      parameters:
+        - name: folder
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 파일별 내용 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                additionalProperties:
+                  type: string
+        "404":
+          description: 폴더가 존재하지 않음
+  /upload-to-github:
+    post:
+      summary: 로컬 파일을 GitHub에 업로드
+      operationId: upload_to_github
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - owner
+                - repo
+                - github_token
+                - local_path
+                - repo_path
+              properties:
+                owner:
+                  type: string
+                repo:
+                  type: string
+                github_token:
+                  type: string
+                local_path:
+                  type: string
+                repo_path:
+                  type: string
+                branch:
+                  type: string
+                  default: main
+      responses:
+        "200":
+          description: 업로드 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  details:
+                    type: object
+        "401":
+          description: GitHub 인증 오류
+        "404":
+          description: 로컬 파일을 찾을 수 없음
+        "500":
+          description: 서버 내부 오류
+  /delete:
+    delete:
+      summary: 파일 또는 폴더 삭제
+      operationId: delete_file_or_folder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - path
+                - type
+              properties:
+                path:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - file
+                    - folder
+      responses:
+        "200":
+          description: 삭제 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+        "404":
+          description: 대상 경로가 존재하지 않음
+        "500":
+          description: 서버 내부 오류
+  /query:
+    post:
+      summary: SQL Server 쿼리 실행 및 결과 반환
+      operationId: run_query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: 실행할 SQL 문의 문자열
+      responses:
+        "200":
+          description: 쿼리 결과 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    items:
+                      type: object
+        "500":
+          description: 쿼리 실행 중 오류
+  /query-to-file:
+    post:
+      summary: SQL 쿼리 실행 후 파일로 저장
+      operationId: run_query_to_file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+                - filename
+              properties:
+                query:
+                  type: string
+                  description: 실행할 SQL 쿼리문
+                filename:
+                  type: string
+                  description: 저장할 파일명 (상대경로)
+      responses:
+        "200":
+          description: 파일 저장 결과 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  file:
+                    type: string
+                  rows:
+                    type: integer
+        "500":
+          description: 쿼리/저장 실패
+  /db/version:
+    get:
+      summary: SQL Server 버전 정보 조회
+      operationId: get_db_version
+      responses:
+        "200":
+          description: 버전 정보 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+        "500":
+          description: 서버 내부 오류
+  /databases:
+    get:
+      summary: 서버에 있는 모든 데이터베이스 목록 조회
+      operationId: list_databases
+      responses:
+        "200":
+          description: 데이터베이스 이름 배열
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "500":
+          description: 서버 내부 오류
+  /databases/{database}/schemas:
+    get:
+      summary: 특정 데이터베이스의 스키마 목록 조회
+      operationId: list_schemas
+      parameters:
+        - name: database
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 스키마 이름 배열
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: 데이터베이스를 찾을 수 없음
+        "500":
+          description: 서버 내부 오류
+  /databases/{database}/tables:
+    get:
+      summary: 특정 데이터베이스 내 모든 테이블 목록 조회
+      operationId: list_tables
+      parameters:
+        - name: database
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 테이블 이름 배열
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: 데이터베이스를 찾을 수 없음
+        "500":
+          description: 서버 내부 오류
+  /databases/{database}/tables/{table}/columns:
+    get:
+      summary: 특정 테이블의 컬럼 메타데이터 조회
+      operationId: list_columns
+      parameters:
+        - name: database
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 컬럼 메타데이터 배열
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    column_name:
+                      type: string
+                    data_type:
+                      type: string
+                    is_nullable:
+                      type: boolean
+                    character_maximum_length:
+                      type: integer
+        "404":
+          description: 데이터베이스 또는 테이블을 찾을 수 없음
+        "500":
+          description: 서버 내부 오류
+  /send-mail:
+    post:
+      summary: Send email via SMTP (joycity 내부 서버 고정)
+      operationId: send_mail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - subject
+                - body
+              properties:
+                subject:
+                  type: string
+                body:
+                  type: string
+      responses:
+        "200":
+          description: 성공 시 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+components:
+  schemas:
+    PS_LOG_REPL.SC_FS2.LOG_REPL_LOGSTAT_SUMMARY_INFO_DAILY_Row:
+      type: object
+      description: Daily user statistics data for Steam games aggregated by country
+        from log data
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: Statistics aggregation date
+        COUNTRY:
+          type: string
+          description: Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents
+            overall total)
+        ACTIVE_USER:
+          type: integer
+          description: Active user count - users who were active on the given date
+          nullable: true
+        NEW_USER:
+          type: integer
+          description: New user count - newly registered users
+          nullable: true
+        RETURN_USER:
+          type: integer
+          description: Returning user count - existing users who reconnected
+          nullable: true
+        PLAY_USER:
+          type: integer
+          description: Playing user count - users who actually played games
+          nullable: true
+        NEW_PLAY_USER:
+          type: integer
+          description: New playing user count - new users who played games
+          nullable: true
+        RETURN_PLAY_USER:
+          type: integer
+          description: Returning playing user count - returning users who played games
+          nullable: true
+        PCCU:
+          type: integer
+          description: Peak Concurrent Connected Users - maximum simultaneous users
+          nullable: true
+        ACCU:
+          type: integer
+          description: Average Concurrent Connected Users - average simultaneous users
+          nullable: true
+        TOTAL_CONNECT_TIME:
+          type: integer
+          description: Total connection time in minutes
+          nullable: true
+        AVG_CONNECT_TIME:
+          type: integer
+          description: Average connection time per user in minutes
+          nullable: true
+        AVG_PLAY_TIME:
+          type: integer
+          description: Average play time per user in minutes
+          nullable: true
+    PS_LOG_REPL.SC_FS2.LOG_REPL_LOGSTAT_SUMMARY_INFO_MONTHLY_Row:
+      type: object
+      description: Monthly user statistics data for Steam games aggregated by country
+        from log data
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: Statistics aggregation date (typically first or last day of
+            month)
+        COUNTRY:
+          type: string
+          description: Country code (e.g., KR, CN, BR, HK, etc. _TOTAL represents
+            overall total)
+        ACTIVE_USER:
+          type: integer
+          description: Monthly Active Users (MAU) - users who were active during the
+            month
+          nullable: true
+        NEW_USER:
+          type: integer
+          description: Monthly new user count - newly registered users during the
+            month
+          nullable: true
+        RETURN_USER:
+          type: integer
+          description: Monthly returning user count - existing users who reconnected
+            during the month
+          nullable: true
+        PLAY_USER:
+          type: integer
+          description: Monthly playing user count - users who actually played games
+            during the month
+          nullable: true
+        NEW_PLAY_USER:
+          type: integer
+          description: Monthly new playing user count - new users who played games
+            during the month
+          nullable: true
+        RETURN_PLAY_USER:
+          type: integer
+          description: Monthly returning playing user count - returning users who
+            played games during the month
+          nullable: true
+        PCCU:
+          type: integer
+          description: Peak Concurrent Connected Users - maximum simultaneous users
+            in the month
+          nullable: true
+        ACCU:
+          type: integer
+          description: Average Concurrent Connected Users - monthly average of simultaneous
+            users
+          nullable: true
+        TOTAL_CONNECT_TIME:
+          type: integer
+          description: Total connection time for the month in minutes
+          nullable: true
+        AVG_CONNECT_TIME:
+          type: integer
+          description: Average connection time per user for the month in minutes
+          nullable: true
+        AVG_PLAY_TIME:
+          type: integer
+          description: Average play time per user for the month in minutes
+          nullable: true
+    PS_LOG_REPL.SC_FS2.LOG_REPL_LOGSTAT_SUMMARY_INFO_WEEKLY_Row:
+      type: object
+      description: 'Steam/PS4 등 플랫폼별, 주차별 주요 유저 통계를 집계하는 주간 요약 테이블. 국가별 데이터 지원 (COUNTRY).
+
+        시간 관련 컬럼은 모두 밀리초(ms, 1/1000초) 단위로 관리됨.
+
+        COUNTRY별 집계 가능. ''_TOTAL'' 값은 전체 글로벌 합계.'
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: 해당 주차의 기준 날짜(일반적으로 일요일 또는 월요일). 집계 기준은 환경/쿼리에 따라 다를 수 있음.
+        ACTIVE_USER:
+          type: integer
+          description: 주간 활성 유저 수 (WAU, Weekly Active Users). 해당 주차 동안 한 번 이상 활동한
+            유저 수.
+          nullable: true
+        NEW_USER:
+          type: integer
+          description: 주간 신규 가입 유저 수 (해당 주에 최초 가입한 유저)
+          nullable: true
+        RETURN_USER:
+          type: integer
+          description: 주간 복귀 유저 수 (기존 유저 중 해당 주에 재방문한 유저)
+          nullable: true
+        PLAY_USER:
+          type: integer
+          description: 주간 실제 플레이 유저 수 (실제 게임플레이를 한 유저)
+          nullable: true
+        NEW_PLAY_USER:
+          type: integer
+          description: 주간 신규 플레이 유저 수 (신규 가입 후 실제 플레이까지 한 유저)
+          nullable: true
+        RETURN_PLAY_USER:
+          type: integer
+          description: 주간 복귀 후 실제 플레이 유저 수 (복귀 유저 중 플레이까지 한 유저)
+          nullable: true
+        TOTAL_CONNECT_TIME:
+          type: integer
+          description: 주간 전체 접속 시간(밀리초 단위, 1/1000초). 모든 유저의 접속시간 합계.
+          nullable: true
+        AVG_CONNECT_TIME:
+          type: integer
+          description: 1인당 평균 접속 시간(밀리초 단위, 1/1000초). 주간 평균.
+          nullable: true
+        AVG_PLAY_TIME:
+          type: integer
+          description: 1인당 평균 플레이 시간(밀리초 단위, 1/1000초). 주간 평균.
+          nullable: true
+        COUNTRY:
+          type: string
+          description: '유저의 국가 코드 (ISO2, 예: KR, US, JP, _TOTAL=전체)'
+    PS_LOG_REPL.SC_FS2.LOGSTAT_USER_CONNECTTIME_DAILY_Row:
+      type: object
+      description: Daily user distribution by connection time ranges for Steam games.
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: Statistics aggregation date
+        COUNTRY:
+          type: string
+          description: Country code (KR, CN, BR, etc. _TOTAL=all)
+        ACTIVE_USER_COUNT:
+          type: integer
+          nullable: true
+          description: Total active user count for the day
+        COUNT_5:
+          type: integer
+          nullable: true
+          description: Users with connection time < 5 min
+        COUNT_5_10:
+          type: integer
+          nullable: true
+          description: Users with connection time 5-10 min
+        COUNT_10_30:
+          type: integer
+          nullable: true
+          description: Users with connection time 10-30 min
+        COUNT_30_60:
+          type: integer
+          nullable: true
+          description: Users with connection time 30-60 min
+        COUNT_60_120:
+          type: integer
+          nullable: true
+          description: Users with connection time 60-120 min
+        COUNT_120_240:
+          type: integer
+          nullable: true
+          description: Users with connection time 120-240 min
+        COUNT_240:
+          type: integer
+          nullable: true
+          description: Users with connection time > 240 min
+    PS_LOG_REPL.SC_FS2.LOGSTAT_USER_CONNECTTIME_MONTHLY_Row:
+      type: object
+      description: Monthly user distribution by connection time ranges for Steam games.
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: Aggregation date (month start/end)
+        COUNTRY:
+          type: string
+          description: Country code (KR, CN, BR, etc. _TOTAL=all)
+        ACTIVE_USER_COUNT:
+          type: integer
+          nullable: true
+          description: Monthly Active Users
+        COUNT_5:
+          type: integer
+          nullable: true
+          description: Users with avg daily connection time < 5 min
+        COUNT_5_10:
+          type: integer
+          nullable: true
+          description: Avg daily 5-10 min
+        COUNT_10_30:
+          type: integer
+          nullable: true
+          description: Avg daily 10-30 min
+        COUNT_30_60:
+          type: integer
+          nullable: true
+          description: Avg daily 30-60 min
+        COUNT_60_120:
+          type: integer
+          nullable: true
+          description: Avg daily 60-120 min
+        COUNT_120_240:
+          type: integer
+          nullable: true
+          description: Avg daily 120-240 min
+        COUNT_240:
+          type: integer
+          nullable: true
+          description: Avg daily > 240 min
+    PS_LOG_REPL.SC_FS2.LOGSTAT_USER_CONNECTTIME_WEEKLY_Row:
+      type: object
+      description: Weekly user distribution by connection time ranges (global aggregate
+        only).
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: Aggregation date (week start)
+        ACTIVE_USER_COUNT:
+          type: integer
+          nullable: true
+          description: Weekly Active Users
+        COUNT_5:
+          type: integer
+          nullable: true
+          description: <5 min avg daily
+        COUNT_5_10:
+          type: integer
+          nullable: true
+          description: 5-10 min avg daily
+        COUNT_10_30:
+          type: integer
+          nullable: true
+          description: 10-30 min avg daily
+        COUNT_30_60:
+          type: integer
+          nullable: true
+          description: 30-60 min avg daily
+        COUNT_60_120:
+          type: integer
+          nullable: true
+          description: 60-120 min avg daily
+        COUNT_120_240:
+          type: integer
+          nullable: true
+          description: 120-240 min avg daily
+        COUNT_240:
+          type: integer
+          nullable: true
+          description: '>240 min avg daily'
+    PS_LOG_REPL.SC_FS2.LOGSTAT_NEW_USER_Row:
+      type: object
+      description: 신규 가입 유저의 등록 기록 및 속성을 저장하는 테이블 (STEAM 플랫폼용)
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: 유저 등록(가입) 일시
+        USER_SN:
+          type: integer
+          format: int64
+          description: 유저 고유 식별자
+        COUNTRY:
+          type: string
+          description: 유저가 가입한 국가의 ISO2 코드
+    PS_LOG_REPL.SC_FS2.LOGSTAT_CHARACTER_USE_Row:
+      type: object
+      description: 국가별/캐릭터별 모드(3vs3, 1vs1)별 플레이 횟수 및 승률을 기록하는 캐릭터 사용 통계 테이블 (STEAM
+        플랫폼용)
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: 통계 집계 일시
+        COUNTRY:
+          type: string
+          description: _TOTAL 사용
+        CHARACTER_CODE:
+          type: string
+          description: 캐릭터 고유 코드
+          x-code-map:
+            "0":  "kCHARACTER_CODE_NONE"
+            "1":  "kCHARACTER_CODE_LUTHER"
+            "2":  "kCHARACTER_CODE_BIGDOG"
+            "3":  "kCHARACTER_CODE_LEE"
+            "4":  "kCHARACTER_CODE_CLARKE"
+            "5":  "kCHARACTER_CODE_MURDOCK"
+            "6":  "kCHARACTER_CODE_LULU"
+            "7":  "kCHARACTER_CODE_AMANDA"
+            "8":  "kCHARACTER_CODE_JOEY"
+            "9":  "kCHARACTER_CODE_WILLIAM"
+            "10": "kCHARACTER_CODE_KIM"
+            "11": "kCHARACTER_CODE_PEDRO"
+            "12": "kCHARACTER_CODE_CINDY"
+            "13": "kCHARACTER_CODE_HELENA"
+            "14": "kCHARACTER_CODE_CAROLINA"
+            "15": "kCHARACTER_CODE_FRED"
+            "16": "kCHARACTER_CODE_CHRISTA"
+            "17": "kCHARACTER_CODE_PROFESSOR"
+            "18": "kCHARACTER_CODE_RIN"
+            "19": "kCHARACTER_CODE_CARTER"
+            "20": "kCHARACTER_CODE_JASON"
+            "21": "kCHARACTER_CODE_MAX"
+            "22": "kCHARACTER_CODE_REBECCA"
+            "23": "kCHARACTER_CODE_LITTLE_FOX"
+            "24": "kCHARACTER_CODE_JIMMY"
+            "25": "kCHARACTER_CODE_FEI"
+            "26": "kCHARACTER_CODE_WALKER"
+            "27": "kCHARACTER_CODE_SARU"
+            "28": "kCHARACTER_CODE_GINGER"
+            "29": "kCHARACTER_CODE_BIGJOE"
+            "30": "kCHARACTER_CODE_NADIA"
+            "31": "kCHARACTER_CODE_DEACON"
+            "32": "kCHARACTER_CODE_MIKA"
+            "33": "kCHARACTER_CODE_JACK"
+            "34": "kCHARACTER_CODE_CAMILA"
+            "35": "kCHARACTER_CODE_NOAH"
+            "36": "kCHARACTER_CODE_AYLA"
+            "37": "kCHARACTER_CODE_FOX"
+            "38": "kCHARACTER_CODE_LIU"
+            "39": "kCHARACTER_CODE_HOWL"
+            "40": "kCHARACTER_CODE_UMA"
+            "41": "kCHARACTER_CODE_CHLOE"
+            "42": "kCHARACTER_CODE_DOUBLED"
+            "43": "kCHARACTER_CODE_MCCC"
+            "44": "kCHARACTER_CODE_JESSIE"
+            "45": "kCHARACTER_CODE_LYOID"
+            "46": "kCHARACTER_CODE_GENESA"
+            "47": "kCHARACTER_CODE_GIANTG"
+            "48": "kCHARACTER_CODE_BLAIR"
+            "49": "kCHARACTER_CODE_DJBAGMAN"
+            "50": "kCHARACTER_CODE_CLARA"
+            "51": "kCHARACTER_CODE_YUNA"
+            "52": "kCHARACTER_CODE_NATHAN"
+            "53": "kCHARACTER_CODE_MARISOL"
+            "54": "kCHARACTER_CODE_TOTAL"
+            "98": "kCHARACTER_CODE_COMMON_SKILL_REPLAY (예외, 유저 소유 캐릭터 아님)"
+            "99": "kCHARACTER_CODE_JEFFERSON (예외, 유저 소유 캐릭터 아님)"
+            "100": "kCHARACTER_CODE_ALL (로그인 용, 실제 게임플레이 캐릭터 아님)"
+        USE_COUNT:
+          type: integer
+          description: 전체 플레이(선택) 횟수
+        3VS3_PLAY_COUNT:
+          type: integer
+          description: 3vs3 모드에서의 플레이 횟수
+        1VS1_PLAY_COUNT:
+          type: integer
+          description: 1vs1 모드에서의 플레이 횟수
+        3VS3_AVG_WINNING_RATE:
+          type: number
+          nullable: true
+          description: 3vs3 모드 평균 승률
+        1VS1_AVG_WINNING_RATE:
+          type: number
+          nullable: true
+          description: 1vs1 모드 평균 승률
+    PS_LOG_REPL.SC_FS2.LOGSTAT_RETENTION_USER_30DAY_Row:
+      type: object
+      description: 국가별/일자별 신규 가입자 및 1~30일차 리텐션(재접속자 수) 집계 테이블
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: 집계 기준 날짜
+        COUNTRY:
+          type: string
+          description: '국가 코드 (ISO2: KR, US, JP, _TOTAL=전체)'
+        NEW_USER:
+          type: integer
+          description: 해당 일자 신규 가입 유저 수
+        RETENTION_1:
+          type: integer
+          nullable: true
+          description: 1일차 리텐션
+        RETENTION_2:
+          type: integer
+          nullable: true
+          description: 2일차 리텐션
+        RETENTION_3:
+          type: integer
+          nullable: true
+          description: 3일차 리텐션
+        RETENTION_4:
+          type: integer
+          nullable: true
+          description: 4일차 리텐션
+        RETENTION_5:
+          type: integer
+          nullable: true
+          description: 5일차 리텐션
+        RETENTION_6:
+          type: integer
+          nullable: true
+          description: 6일차 리텐션
+        RETENTION_7:
+          type: integer
+          nullable: true
+          description: 7일차 리텐션
+        RETENTION_8:
+          type: integer
+          nullable: true
+          description: 8일차 리텐션
+        RETENTION_9:
+          type: integer
+          nullable: true
+          description: 9일차 리텐션
+        RETENTION_10:
+          type: integer
+          nullable: true
+          description: 10일차 리텐션
+        RETENTION_11:
+          type: integer
+          nullable: true
+          description: 11일차 리텐션
+        RETENTION_12:
+          type: integer
+          nullable: true
+          description: 12일차 리텐션
+        RETENTION_13:
+          type: integer
+          nullable: true
+          description: 13일차 리텐션
+        RETENTION_14:
+          type: integer
+          nullable: true
+          description: 14일차 리텐션
+        RETENTION_15:
+          type: integer
+          nullable: true
+          description: 15일차 리텐션
+        RETENTION_16:
+          type: integer
+          nullable: true
+          description: 16일차 리텐션
+        RETENTION_17:
+          type: integer
+          nullable: true
+          description: 17일차 리텐션
+        RETENTION_18:
+          type: integer
+          nullable: true
+          description: 18일차 리텐션
+        RETENTION_19:
+          type: integer
+          nullable: true
+          description: 19일차 리텐션
+        RETENTION_20:
+          type: integer
+          nullable: true
+          description: 20일차 리텐션
+        RETENTION_21:
+          type: integer
+          nullable: true
+          description: 21일차 리텐션
+        RETENTION_22:
+          type: integer
+          nullable: true
+          description: 22일차 리텐션
+        RETENTION_23:
+          type: integer
+          nullable: true
+          description: 23일차 리텐션
+        RETENTION_24:
+          type: integer
+          nullable: true
+          description: 24일차 리텐션
+        RETENTION_25:
+          type: integer
+          nullable: true
+          description: 25일차 리텐션
+        RETENTION_26:
+          type: integer
+          nullable: true
+          description: 26일차 리텐션
+        RETENTION_27:
+          type: integer
+          nullable: true
+          description: 27일차 리텐션
+        RETENTION_28:
+          type: integer
+          nullable: true
+          description: 28일차 리텐션
+        RETENTION_29:
+          type: integer
+          nullable: true
+          description: 29일차 리텐션
+        RETENTION_30:
+          type: integer
+          nullable: true
+          description: 30일차 리텐션
+    PS_LOG_REPL.SC_FS2.LOGSTAT_RETENTION_USER_ACTIVE_30DAY_Row:
+      type: object
+      description: 국가별/일자별 전체 유저 기반의 1~30일차 활동 리텐션(재접속/재활동 유저 수) 집계 테이블
+      properties:
+        REG_DATE:
+          type: string
+          format: date-time
+          description: 집계 기준 일자
+        COUNTRY:
+          type: string
+          description: '국가 코드 (ISO2: KR, US, JP, _TOTAL=전체)'
+        NEW_USER:
+          type: integer
+          description: 전체 활동 유저 수
+        RETENTION_1:
+          type: integer
+          nullable: true
+          description: 1일차 리텐션
+        RETENTION_2:
+          type: integer
+          nullable: true
+          description: 2일차 리텐션
+        RETENTION_3:
+          type: integer
+          nullable: true
+          description: 3일차 리텐션
+        RETENTION_4:
+          type: integer
+          nullable: true
+          description: 4일차 리텐션
+        RETENTION_5:
+          type: integer
+          nullable: true
+          description: 5일차 리텐션
+        RETENTION_6:
+          type: integer
+          nullable: true
+          description: 6일차 리텐션
+        RETENTION_7:
+          type: integer
+          nullable: true
+          description: 7일차 리텐션
+        RETENTION_8:
+          type: integer
+          nullable: true
+          description: 8일차 리텐션
+        RETENTION_9:
+          type: integer
+          nullable: true
+          description: 9일차 리텐션
+        RETENTION_10:
+          type: integer
+          nullable: true
+          description: 10일차 리텐션
+        RETENTION_11:
+          type: integer
+          nullable: true
+          description: 11일차 리텐션
+        RETENTION_12:
+          type: integer
+          nullable: true
+          description: 12일차 리텐션
+        RETENTION_13:
+          type: integer
+          nullable: true
+          description: 13일차 리텐션
+        RETENTION_14:
+          type: integer
+          nullable: true
+          description: 14일차 리텐션
+        RETENTION_15:
+          type: integer
+          nullable: true
+          description: 15일차 리텐션
+        RETENTION_16:
+          type: integer
+          nullable: true
+          description: 16일차 리텐션
+        RETENTION_17:
+          type: integer
+          nullable: true
+          description: 17일차 리텐션
+        RETENTION_18:
+          type: integer
+          nullable: true
+          description: 18일차 리텐션
+        RETENTION_19:
+          type: integer
+          nullable: true
+          description: 19일차 리텐션
+        RETENTION_20:
+          type: integer
+          nullable: true
+          description: 20일차 리텐션
+        RETENTION_21:
+          type: integer
+          nullable: true
+          description: 21일차 리텐션
+        RETENTION_22:
+          type: integer
+          nullable: true
+          description: 22일차 리텐션
+        RETENTION_23:
+          type: integer
+          nullable: true
+          description: 23일차 리텐션
+        RETENTION_24:
+          type: integer
+          nullable: true
+          description: 24일차 리텐션
+        RETENTION_25:
+          type: integer
+          nullable: true
+          description: 25일차 리텐션
+        RETENTION_26:
+          type: integer
+          nullable: true
+          description: 26일차 리텐션
+        RETENTION_27:
+          type: integer
+          nullable: true
+          description: 27일차 리텐션
+        RETENTION_28:
+          type: integer
+          nullable: true
+          description: 28일차 리텐션
+        RETENTION_29:
+          type: integer
+          nullable: true
+          description: 29일차 리텐션
+        RETENTION_30:
+          type: integer
+          nullable: true
+          description: 30일차 리텐션

@@ -41,6 +41,8 @@ class LoggingHandler(BaseHTTPRequestHandler):
 # 0.0.0.0 바인딩 필수!
 server = HTTPServer(("0.0.0.0", 8000), LoggingHandler)
 
+# ngrok.exe의 정확한 경로를 pyngrok에 명시적으로 알려줌
+conf.get_default().ngrok_path = "F:/LocalServer_git/CHATGPT_MCP/LocalServer/ngrok.exe"
 
 public_url = ngrok.connect(
     8000,                 # 로컬 포트
